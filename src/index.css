@@ -1,0 +1,496 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --paper: 36 32% 89%;
+    --paper-soft: 36 30% 93%;
+    --ink: 220 22% 18%;
+    --rust: 6 64% 44%;
+    --teal: 188 56% 28%;
+    --mustard: 38 78% 50%;
+    --avocado: 78 30% 30%;
+    --cream: 36 34% 96%;
+
+    --background: var(--paper);
+    --foreground: var(--ink);
+
+    --card: 36 34% 92%;
+    --card-foreground: var(--ink);
+
+    --primary: var(--ink);
+    --primary-foreground: var(--cream);
+
+    --secondary: 36 22% 83%;
+    --secondary-foreground: var(--ink);
+
+    --muted: 36 18% 81%;
+    --muted-foreground: 220 14% 32%;
+
+    --accent: var(--rust);
+    --accent-foreground: var(--cream);
+
+    --destructive: var(--rust);
+    --destructive-foreground: var(--cream);
+
+    --border: 220 22% 18% / 0.20;
+    --input: 220 22% 18% / 0.30;
+    --ring: var(--ink);
+
+    --ember: var(--rust);
+    --gilt: var(--mustard);
+    --brass: var(--mustard);
+
+    --radius: 0px;
+
+    --shadow: hsl(var(--ink));
+    --shadow-soft: hsl(var(--ink) / 0.20);
+
+    --specimen-bg: hsl(var(--ink));
+    --specimen-fg: hsl(var(--mustard));
+    --specimen-border: hsl(var(--ink));
+    --specimen-tick: hsl(var(--paper));
+
+    --tile-press-bg: hsl(var(--ink));
+    --tile-press-fg: hsl(var(--paper));
+  }
+
+  :root.dark {
+    --paper: 36 12% 70%;
+    --paper-soft: 222 20% 14%;
+    --ink: 222 22% 12%;
+    --rust: 10 42% 52%;
+    --teal: 186 28% 44%;
+    --mustard: 38 38% 46%;
+    --avocado: 88 18% 42%;
+    --cream: 222 22% 12%;
+
+    --background: var(--ink);
+    --foreground: var(--paper);
+
+    --card: 222 20% 14%;
+    --card-foreground: var(--paper);
+
+    --primary: var(--paper);
+    --primary-foreground: var(--ink);
+
+    --secondary: 222 16% 18%;
+    --secondary-foreground: var(--paper);
+
+    --muted: 222 14% 16%;
+    --muted-foreground: 36 8% 50%;
+
+    --accent: var(--rust);
+    --accent-foreground: var(--ink);
+
+    --destructive: var(--rust);
+    --destructive-foreground: var(--ink);
+
+    --border: 36 12% 70% / 0.10;
+    --input: 36 12% 70% / 0.18;
+    --ring: var(--paper);
+
+    --shadow: hsl(222 40% 5%);
+    --shadow-soft: hsl(222 40% 5% / 0.55);
+
+    --specimen-bg: hsl(222 20% 16%);
+    --specimen-fg: hsl(var(--mustard));
+    --specimen-border: hsl(var(--mustard) / 0.4);
+    --specimen-tick: hsl(var(--mustard) / 0.5);
+
+    --tile-press-bg: hsl(var(--paper));
+    --tile-press-fg: hsl(var(--ink));
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    font-feature-settings: "ss01", "ss02", "kern", "liga";
+    font-variant-numeric: tabular-nums lining-nums;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+    transition: background-color 240ms cubic-bezier(.2,.7,.2,1),
+                color 240ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  button, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  ::selection {
+    background: hsl(var(--mustard));
+    color: hsl(var(--ink));
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--foreground) / 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground) / 0.45);
+    border: 2px solid hsl(var(--foreground) / 0.05);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--mustard));
+  }
+
+  .apl-glyph {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-feature-settings: "ss02", "calt";
+  }
+}
+
+@layer components {
+  .chassis {
+    position: relative;
+    box-shadow: 5px 5px 0 var(--shadow);
+  }
+
+  .phosphor {
+    color: hsl(var(--avocado));
+  }
+
+  .wordmark {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    color: hsl(var(--foreground));
+  }
+  .wordmark-lamp {
+    display: inline-block;
+    color: hsl(var(--foreground) / 0.55);
+  }
+  :root.dark .wordmark-lamp {
+    color: hsl(var(--mustard) / 0.85);
+  }
+
+  .title-console {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    line-height: 1;
+  }
+
+  .title-console-sm {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+  }
+
+  .folio {
+    @apply font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground;
+  }
+
+  .marginalia {
+    @apply font-sans not-italic text-[12.5px] text-muted-foreground leading-snug;
+  }
+
+  .glyph-row {
+    position: relative;
+    transition: background-color 160ms cubic-bezier(.2,.7,.2,1);
+  }
+  .glyph-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: hsl(var(--rust));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 200ms cubic-bezier(.2,.7,.2,1);
+  }
+  .glyph-row:hover {
+    background: hsl(var(--foreground) / 0.04);
+  }
+  .glyph-row:hover::before {
+    transform: scaleY(1);
+  }
+
+  .specimen {
+    position: relative;
+    background: var(--specimen-bg);
+    color: var(--specimen-fg);
+    border: 1px solid var(--specimen-border);
+    box-shadow: 4px 4px 0 var(--shadow);
+    transition: transform 160ms cubic-bezier(.2,.7,.2,1), box-shadow 160ms;
+  }
+  .specimen::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 6px;
+    height: 6px;
+    background: var(--specimen-tick);
+    border: 1px solid var(--specimen-border);
+    opacity: 0;
+    transition: opacity 160ms cubic-bezier(.2,.7,.2,1);
+  }
+  .glyph-row:hover .specimen {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 hsl(var(--rust));
+  }
+  .glyph-row:hover .specimen::after {
+    opacity: 1;
+  }
+
+  .kbd-scroll {
+    --kbd-size: 38px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--foreground) / 0.35) transparent;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 14px,
+      black calc(100% - 18px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 14px,
+      black calc(100% - 18px),
+      transparent 100%
+    );
+  }
+  @media (min-width: 640px) {
+    .kbd-scroll {
+      --kbd-size: 46px;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+  .kbd-scroll::-webkit-scrollbar { height: 6px; }
+  .kbd-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground) / 0.35);
+    border: none;
+  }
+
+  .kbd-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--foreground) / 0.85);
+    box-shadow: 2px 2px 0 var(--shadow);
+    color: hsl(var(--foreground));
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 90ms cubic-bezier(.2,.7,.2,1),
+                box-shadow 90ms cubic-bezier(.2,.7,.2,1),
+                background-color 90ms,
+                color 90ms;
+  }
+  .kbd-tile:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--shadow);
+    background: var(--tile-press-bg);
+    color: var(--tile-press-fg);
+  }
+  .kbd-tile--muted {
+    background: hsl(var(--foreground) / 0.04);
+    border-color: hsl(var(--foreground) / 0.35);
+    box-shadow: 2px 2px 0 var(--shadow-soft);
+    color: hsl(var(--foreground) / 0.4);
+  }
+
+  .kbd-cell {
+    position: relative;
+    display: inline-block;
+    height: var(--kbd-size, 38px);
+    width: var(--kbd-size, 38px);
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--foreground) / 0.85);
+    box-shadow: 2px 2px 0 var(--shadow);
+    transition: transform 90ms cubic-bezier(.2,.7,.2,1),
+                box-shadow 90ms cubic-bezier(.2,.7,.2,1);
+    flex: 0 0 auto;
+  }
+  .kbd-cell:hover {
+    box-shadow: 3px 3px 0 var(--shadow);
+    transform: translate(-1px, -1px);
+  }
+  .kbd-cell:has(.kbd-bare:active) {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--shadow);
+  }
+
+  .kbd-bare {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 4px;
+    background: transparent;
+    border: 0;
+    color: hsl(var(--foreground));
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    cursor: pointer;
+    z-index: 0;
+    transition: background-color 90ms, color 90ms;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .kbd-bare:hover {
+    background: var(--tile-press-bg);
+    color: var(--tile-press-fg);
+  }
+  .kbd-cell:has(.kbd-bare:hover) .kbd-ascii {
+    color: var(--tile-press-fg);
+    opacity: 0.55;
+  }
+  .kbd-glyph {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  @media (min-width: 640px) {
+    .kbd-glyph { font-size: 1.2rem; }
+  }
+
+  .kbd-ascii {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    line-height: 1;
+    color: hsl(var(--foreground) / 0.5);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .kbd-shift {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: hsl(var(--foreground));
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 90ms, color 90ms;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (min-width: 640px) {
+    .kbd-shift { min-width: 18px; height: 18px; font-size: 14px; }
+  }
+  .kbd-shift:hover {
+    background: var(--tile-press-bg);
+    color: var(--tile-press-fg);
+  }
+
+  .kbd-cell--muted {
+    background: hsl(var(--foreground) / 0.04);
+    border-color: hsl(var(--foreground) / 0.35);
+    box-shadow: 2px 2px 0 var(--shadow-soft);
+  }
+  .kbd-bare--muted {
+    color: hsl(var(--foreground) / 0.4);
+  }
+  .kbd-bare--muted:hover {
+    background: hsl(var(--foreground) / 0.18);
+    color: hsl(var(--foreground) / 0.55);
+  }
+  .kbd-shift--muted {
+    color: hsl(var(--foreground) / 0.4);
+  }
+  .kbd-shift--muted:hover {
+    background: hsl(var(--foreground) / 0.25);
+    color: hsl(var(--foreground) / 0.7);
+  }
+
+  .chip {
+    @apply text-[10px] uppercase tracking-[0.22em] font-mono px-2.5 py-1.5 border transition-colors;
+    line-height: 1;
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    touch-action: manipulation;
+  }
+  .chip-on {
+    background: hsl(var(--mustard));
+    color: hsl(var(--ink));
+    border-color: hsl(var(--ink));
+  }
+  :root.dark .chip-on {
+    background: hsl(var(--mustard) / 0.22);
+    color: hsl(var(--mustard));
+    border-color: hsl(var(--mustard) / 0.6);
+  }
+  .chip-off {
+    @apply bg-transparent text-muted-foreground border-foreground/25 hover:text-foreground hover:border-foreground;
+  }
+
+  .page-mark {
+    position: fixed;
+    inset: auto -20px -50px auto;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 14rem;
+    line-height: 1;
+    color: hsl(var(--foreground) / 0.025);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  @media (min-width: 768px) {
+    .page-mark {
+      inset: auto -40px -120px auto;
+      font-size: 32rem;
+    }
+  }
+  :root.dark .page-mark {
+    color: hsl(var(--mustard) / 0.025);
+  }
+}

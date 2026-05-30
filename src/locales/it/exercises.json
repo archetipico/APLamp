@@ -1,0 +1,944 @@
+{
+  "sum1to10": {
+    "title": "Somma da 1 a 10",
+    "prompt": "Calcola la somma degli interi da 1 a 10.",
+    "result": "55",
+    "explanation": "`⍳10` sputa fuori `1 2 … 10`. `+/` infila un `+` tra ogni coppia e riduce tutto a un numero. Somma di Gauss."
+  },
+  "product1to5": {
+    "title": "Prodotto da 1 a 5",
+    "prompt": "Calcola il prodotto degli interi da 1 a 5 (cioè 5 fattoriale).",
+    "result": "120",
+    "explanation": "Stesso meccanismo di `+/` ma con la moltiplicazione: `1×2×3×4×5`. È `5!`."
+  },
+  "vectorMin": {
+    "title": "Minimo di un vettore",
+    "prompt": "Trova il valore più piccolo in 3 1 4 1 5 9 2 6.",
+    "result": "1",
+    "explanation": "`⌊` fra due numeri restituisce il minore. `⌊/` lo fa scorrere lungo il vettore finché non resta un solo valore: il minimo."
+  },
+  "vectorMax": {
+    "title": "Massimo di un vettore",
+    "prompt": "Trova il valore più grande in 3 1 4 1 5 9 2 6.",
+    "result": "9",
+    "explanation": "Speculare a `⌊/`, usando `⌈` che fra due numeri tiene il maggiore."
+  },
+  "average": {
+    "title": "Media aritmetica",
+    "prompt": "Calcola la media di 2 4 6 8 10.",
+    "result": "6",
+    "explanation": "`+/` dà la somma `30`, `⍴` su un vettore restituisce la lunghezza `5`. Dividi e ottieni la media."
+  },
+  "length": {
+    "title": "Lunghezza di un vettore",
+    "prompt": "Quanti elementi ha il vettore 1 1 2 3 5 8 13?",
+    "result": "7",
+    "explanation": "Su un vettore semplice la forma coincide con il numero di elementi. `⍴` te lo dice subito."
+  },
+  "firstNEvens": {
+    "title": "Primi numeri pari",
+    "prompt": "Genera i primi dieci numeri pari positivi.",
+    "result": "2 4 6 8 10 12 14 16 18 20",
+    "explanation": "`⍳10` produce `1..10`. Moltiplica ogni elemento per 2: ecco la sequenza dei pari."
+  },
+  "firstNOdds": {
+    "title": "Primi numeri dispari",
+    "prompt": "Genera i primi dieci numeri dispari positivi.",
+    "result": "1 3 5 7 9 11 13 15 17 19",
+    "explanation": "Costruisci i pari come prima, poi togli 1 a ciascuno. Attenzione: `¯1` è la costante negativa, non l'operatore `-` applicato a `1`."
+  },
+  "squares": {
+    "title": "Quadrati",
+    "prompt": "Calcola i quadrati degli interi da 1 a 10.",
+    "result": "1 4 9 16 25 36 49 64 81 100",
+    "explanation": "Insidia ricorrente: in APL `*` è elevamento a potenza, non moltiplicazione. `(⍳10)*2` eleva ogni elemento al quadrato."
+  },
+  "cubes": {
+    "title": "Cubi",
+    "prompt": "Calcola i cubi degli interi da 1 a 5.",
+    "result": "1 8 27 64 125",
+    "explanation": "Come i quadrati, con esponente `3`."
+  },
+  "reverseVector": {
+    "title": "Inverti un vettore",
+    "prompt": "Inverti l'ordine di 1 2 3 4 5.",
+    "result": "5 4 3 2 1",
+    "explanation": "`⌽` monadico capovolge un vettore lungo l'ultimo asse."
+  },
+  "sortAscending": {
+    "title": "Ordina in crescente",
+    "prompt": "Ordina 3 1 4 1 5 9 2 6 in ordine crescente.",
+    "result": "1 1 2 3 4 5 6 9",
+    "explanation": "Punto chiave: `⍋` non ordina niente. Ti dà la **ricetta** delle posizioni da seguire per leggere il vettore in ordine crescente.\n\nSu `3 1 4 1 5 9 2 6` il più piccolo (il primo `1`) sta in posizione 2. Il secondo più piccolo (l'altro `1`) sta in posizione 4. Poi il `2` in posizione 7, il `3` in posizione 1, e così via. La ricetta che esce è `2 4 7 1 3 5 8 6`.\n\nA quel punto `⍵[...]` esegue la ricetta: pesca da `⍵` agli indici indicati, in fila. Il risultato è il vettore ordinato.\n\nIl motivo per cui APL separa i due passi: la stessa ricetta `⍋⍵` può ordinare un secondo vettore parallelo (per esempio nomi ordinati per età), cosa impossibile se `⍋` consumasse gli indici da solo."
+  },
+  "sortDescending": {
+    "title": "Ordina in decrescente",
+    "prompt": "Ordina 3 1 4 1 5 9 2 6 in ordine decrescente.",
+    "result": "9 6 5 4 3 2 1 1",
+    "explanation": "Stessa logica di `⍋` ma `⍒` produce la ricetta per leggere in ordine decrescente."
+  },
+  "catenateVectors": {
+    "title": "Concatena due vettori",
+    "prompt": "Unisci 1 2 3 con 4 5 in un unico vettore.",
+    "result": "1 2 3 4 5",
+    "explanation": "La virgola incolla due vettori lungo l'ultimo asse."
+  },
+  "firstElement": {
+    "title": "Primo elemento",
+    "prompt": "Prendi il primo elemento di 10 20 30.",
+    "result": "10",
+    "explanation": "`⊃` monadico (first / disclose) tira fuori il primo elemento."
+  },
+  "lastElement": {
+    "title": "Ultimo elemento",
+    "prompt": "Prendi l'ultimo elemento di 10 20 30.",
+    "result": "30",
+    "explanation": "Capovolgi con `⌽`, poi prendi il primo. Trucco classico per arrivare all'ultimo senza conoscere la lunghezza."
+  },
+  "dropFirst": {
+    "title": "Scarta il primo elemento",
+    "prompt": "Rimuovi il primo elemento di 1 2 3 4 5.",
+    "result": "2 3 4 5",
+    "explanation": "`↓` con numero positivo butta via quel tanto di elementi dall'inizio."
+  },
+  "dropLast": {
+    "title": "Scarta l'ultimo elemento",
+    "prompt": "Rimuovi l'ultimo elemento di 1 2 3 4 5.",
+    "result": "1 2 3 4",
+    "explanation": "`↓` con numero negativo butta via dalla coda."
+  },
+  "takeFirst3": {
+    "title": "Prendi i primi tre",
+    "prompt": "Prendi i primi tre elementi di 10 20 30 40 50.",
+    "result": "10 20 30",
+    "explanation": "`↑` con numero positivo pesca gli N elementi iniziali. Opposto di `↓`."
+  },
+  "takeLast3": {
+    "title": "Prendi gli ultimi tre",
+    "prompt": "Prendi gli ultimi tre elementi di 10 20 30 40 50.",
+    "result": "30 40 50",
+    "explanation": "`↑` con numero negativo pesca dalla coda."
+  },
+  "evenMask": {
+    "title": "Maschera booleana dei pari",
+    "prompt": "Costruisci una maschera 0/1 che marca i valori pari in 1..10.",
+    "result": "0 1 0 1 0 1 0 1 0 1",
+    "explanation": "`2|⍳10` è il resto della divisione per 2 di ogni elemento. Confrontandolo con `0` ottieni `1` esattamente sui pari."
+  },
+  "countEvens": {
+    "title": "Conta i numeri pari",
+    "prompt": "Quanti numeri pari ci sono tra 1 e 50?",
+    "result": "25",
+    "explanation": "La stessa maschera dei pari, ora su `1..50`. `+/` somma gli `1` della maschera: uno per ogni pari."
+  },
+  "sumEvens": {
+    "title": "Somma i numeri pari",
+    "prompt": "Somma i numeri pari tra 1 e 100.",
+    "result": "2550",
+    "explanation": "Maschera dei pari di `1..100`, poi `/` la usa per tenere solo gli elementi dove vale `1` (cioè i pari stessi). `+/` chiude la somma."
+  },
+  "squareRoot": {
+    "title": "Radice quadrata",
+    "prompt": "Calcola la radice quadrata di 144.",
+    "result": "12",
+    "explanation": "Elevare a `0.5` è la radice quadrata."
+  },
+  "hypotenuse": {
+    "title": "Ipotenusa pitagorica",
+    "prompt": "Calcola l'ipotenusa di un triangolo rettangolo con cateti 3 e 4.",
+    "result": "5",
+    "explanation": "`3² + 4² = 25`, radice quadrata di `25` è `5`. Pitagora in una riga."
+  },
+  "absoluteValues": {
+    "title": "Valori assoluti",
+    "prompt": "Calcola il valore assoluto di ogni elemento di ¯3 ¯1 0 2 4.",
+    "result": "3 1 0 2 4",
+    "explanation": "`|` monadico è la magnitudo, cioè il valore assoluto."
+  },
+  "negateVector": {
+    "title": "Negazione di un vettore",
+    "prompt": "Inverti il segno di ogni elemento di 1 ¯2 3 ¯4.",
+    "result": "¯1 2 ¯3 4",
+    "explanation": "`-` monadico cambia segno a ciascun elemento."
+  },
+  "rollDie": {
+    "title": "Lancia un dado",
+    "prompt": "Lancia un singolo dado a sei facce.",
+    "result": "un intero casuale fra 1 e 6",
+    "explanation": "`?` monadico tira un numero casuale fra `1` e l'argomento."
+  },
+  "rollFiveDice": {
+    "title": "Lancia cinque dadi",
+    "prompt": "Lancia cinque dadi a sei facce.",
+    "result": "cinque interi casuali fra 1 e 6",
+    "explanation": "`5⍴6` costruisce il vettore `6 6 6 6 6`. `?` su un vettore tira un dado separato per ogni elemento."
+  },
+  "piAndE": {
+    "title": "π ed e",
+    "prompt": "Calcola π e la base del logaritmo naturale e.",
+    "result": "3.14159265… 2.71828182…",
+    "explanation": "`○` monadico moltiplica per π, quindi `○1` è π. `*1` è `e¹ = e`. La virgola li affianca."
+  },
+  "fToC": {
+    "title": "Da Fahrenheit a Celsius",
+    "prompt": "Converti 32, 100 e 212 da Fahrenheit a Celsius.",
+    "result": "0 37.778 100",
+    "explanation": "APL va letto da destra. Prima `32 100 212 - 32` produce `0 68 180`, poi tutto moltiplicato per `5÷9`."
+  },
+  "cToF": {
+    "title": "Da Celsius a Fahrenheit",
+    "prompt": "Converti 0, 37 e 100 da Celsius a Fahrenheit.",
+    "result": "32 98.6 212",
+    "explanation": "Moltiplica per `9÷5` (sempre da destra) e aggiungi `32`."
+  },
+  "signOfEach": {
+    "title": "Segno di ogni valore",
+    "prompt": "Calcola il segno di ogni elemento di ¯3 0 4 ¯7.",
+    "result": "¯1 0 1 ¯1",
+    "explanation": "`×` monadico è il signum: vale `¯1`, `0` o `1` a seconda del segno."
+  },
+  "ceilingFloor": {
+    "title": "Tetto e pavimento",
+    "prompt": "Calcola tetto e pavimento di 3.7.",
+    "result": "4 3",
+    "explanation": "`⌈` arrotonda all'intero superiore, `⌊` a quello inferiore. La virgola li mette uno accanto all'altro."
+  },
+  "sumOfSquares": {
+    "title": "Somma dei quadrati",
+    "prompt": "Calcola la somma dei quadrati di 1..10.",
+    "result": "385",
+    "explanation": "`(⍳10)*2` produce `1 4 9 … 100`, `+/` somma."
+  },
+  "indicesOfOnes": {
+    "title": "Posizioni degli 1",
+    "prompt": "Elenca le posizioni degli 1 in 0 1 0 1 1 0.",
+    "result": "2 4 5",
+    "explanation": "`⍸` restituisce le posizioni in cui un vettore booleano vale `1`."
+  },
+  "membershipTest": {
+    "title": "Test di appartenenza",
+    "prompt": "Quali tra 1 2 3 4 5 appartengono a 2 4 6?",
+    "result": "0 1 0 1 0",
+    "explanation": "`∊` scorre il vettore di sinistra e mette `1` se l'elemento compare anche a destra, altrimenti `0`."
+  },
+  "positionOfItem": {
+    "title": "Posizione di un elemento",
+    "prompt": "Trova la posizione di 7 dentro 2 5 7 11.",
+    "result": "3",
+    "explanation": "`⍳` diadico cerca il valore di destra nel vettore di sinistra e restituisce la prima posizione in cui lo incontra."
+  },
+  "cumulativeSum": {
+    "title": "Somme cumulate",
+    "prompt": "Calcola le somme cumulate di 1..5.",
+    "result": "1 3 6 10 15",
+    "explanation": "`\\` è la versione di `/` che conserva gli intermedi. `+\\` produce `1`, `1+2`, `1+2+3`, e così via."
+  },
+  "cumulativeProduct": {
+    "title": "Prodotti cumulati",
+    "prompt": "Calcola i prodotti cumulati di 1..5.",
+    "result": "1 2 6 24 120",
+    "explanation": "Come la somma cumulata ma con `×`. Ogni passo è un fattoriale parziale."
+  },
+  "runningMax": {
+    "title": "Massimo cumulato",
+    "prompt": "Calcola il massimo cumulato di 3 1 4 1 5 9 2 6.",
+    "result": "3 3 4 4 5 9 9 9",
+    "explanation": "Ad ogni posizione, `⌈\\` tiene il valore più grande visto fino a quel punto."
+  },
+  "argmax": {
+    "title": "Indice del massimo",
+    "prompt": "Trova l'indice dell'elemento più grande in 3 1 4 1 5 9 2 6.",
+    "result": "6",
+    "explanation": "`⍒` dà la ricetta del decrescente: la sua prima posizione è dove sta il massimo. Il `9` è nel sesto slot."
+  },
+  "argmin": {
+    "title": "Indice del minimo",
+    "prompt": "Trova l'indice dell'elemento più piccolo in 3 1 4 1 5 9 2 6.",
+    "result": "2",
+    "explanation": "Speculare ad argmax: `⍋` dà la ricetta del crescente, e la sua prima posizione è quella del minimo."
+  },
+  "topThree": {
+    "title": "I tre valori più grandi",
+    "prompt": "Restituisci i tre valori più grandi di 5 1 9 3 7 2 8.",
+    "result": "9 8 7",
+    "explanation": "`{⍵[⍒⍵]}` ordina decrescente, producendo `9 8 7 5 3 2 1`. Poi `3↑` pesca i primi tre."
+  },
+  "distinctValues": {
+    "title": "Valori distinti",
+    "prompt": "Elenca i valori distinti di 1 2 2 3 1 4 4.",
+    "result": "1 2 3 4",
+    "explanation": "`∪` monadico tiene un solo esemplare di ogni valore, nell'ordine in cui appare la prima volta."
+  },
+  "countDistinct": {
+    "title": "Conta i valori distinti",
+    "prompt": "Quanti valori distinti ci sono in 1 2 2 3 1 4 4?",
+    "result": "4",
+    "explanation": "Estrai gli unici e leggi la lunghezza con `⍴`."
+  },
+  "unionVectors": {
+    "title": "Unione di due vettori",
+    "prompt": "Calcola l'unione di 1 2 3 e 3 4 5.",
+    "result": "1 2 3 4 5",
+    "explanation": "`∪` diadico fonde i due vettori scartando i doppioni."
+  },
+  "intersectionVectors": {
+    "title": "Intersezione di due vettori",
+    "prompt": "Calcola l'intersezione di 1 2 3 4 e 3 4 5.",
+    "result": "3 4",
+    "explanation": "`∩` tiene solo gli elementi presenti in entrambi i vettori."
+  },
+  "bitmaskToPmOne": {
+    "title": "Booleani a ±1",
+    "prompt": "Trasforma 0 1 0 1 1 nei valori ¯1 1 ¯1 1 1.",
+    "result": "¯1 1 ¯1 1 1",
+    "explanation": "Trucco molto usato: raddoppia il bit e sottrai 1. `0` diventa `¯1+0 = ¯1`, `1` diventa `¯1+2 = 1`. Pratico per trasformare una maschera booleana in segni."
+  },
+  "clampZeroOne": {
+    "title": "Limita a [0, 1]",
+    "prompt": "Limita i valori ¯1 0.5 2 all'intervallo tra 0 e 1.",
+    "result": "0 0.5 1",
+    "explanation": "Sempre da destra. `1 ⌊ ¯1 0.5 2` impone un tetto a `1` producendo `¯1 0.5 1`. Poi `0 ⌈ …` alza il pavimento a `0`. Clamp in due colpi."
+  },
+  "replaceNegWithZero": {
+    "title": "Azzera i valori negativi",
+    "prompt": "Sostituisci con zero i valori negativi di ¯3 ¯1 0 2 4.",
+    "result": "0 0 0 2 4",
+    "explanation": "`0 ⌈ v` prende per ogni elemento il maggiore fra `0` e l'elemento stesso. I negativi vengono livellati a `0`."
+  },
+  "reshape3x4": {
+    "title": "Forma una matrice 3×4",
+    "prompt": "Forma 1..12 come matrice a 3 righe e 4 colonne.",
+    "result": " 1  2  3  4\n 5  6  7  8\n 9 10 11 12",
+    "explanation": "`⍴` diadico riempie la forma chiesta con il vettore di destra, riga per riga."
+  },
+  "rowSums": {
+    "title": "Somme di riga",
+    "prompt": "Somma ogni riga di una matrice 3×4.",
+    "result": "10 26 42",
+    "explanation": "`+/` su una matrice riduce lungo l'ultimo asse: una somma per riga."
+  },
+  "columnSums": {
+    "title": "Somme di colonna",
+    "prompt": "Somma ogni colonna di una matrice 3×4.",
+    "result": "15 18 21 24",
+    "explanation": "Stessa idea di `+/` ma con `⌿` (slash con barretta), che agisce sul primo asse: una somma per colonna."
+  },
+  "matrixTranspose": {
+    "title": "Trasposta di una matrice",
+    "prompt": "Trasponi una matrice 2×3 in una matrice 3×2.",
+    "result": "1 4\n2 5\n3 6",
+    "explanation": "`⍉` monadico scambia righe e colonne. Una 2×3 diventa 3×2."
+  },
+  "identityMatrix": {
+    "title": "Schema dell'identità",
+    "prompt": "Costruisci una matrice 5×5 con 1 sulla diagonale e 0 altrove.",
+    "result": "1 0 0 0 0\n0 1 0 0 0\n0 0 1 0 0\n0 0 0 1 0\n0 0 0 0 1",
+    "explanation": "`∘.f` costruisce una tabella confrontando ogni coppia `(i,j)`. Con `=`, la cella vale `1` solo dove `i=j`: la diagonale."
+  },
+  "multiplicationTable": {
+    "title": "Tavola pitagorica",
+    "prompt": "Costruisci la tavola pitagorica 10×10.",
+    "result": "matrice 10×10 con cella (i,j) = i×j",
+    "explanation": "Outer product `∘.×`: ogni `i` di sinistra è abbinato a ogni `j` di destra, e i due si moltiplicano. Tavola completa in una riga."
+  },
+  "outerSum": {
+    "title": "Somma esterna",
+    "prompt": "Costruisci la somma esterna di 1..3 con sé stesso.",
+    "result": "2 3 4\n3 4 5\n4 5 6",
+    "explanation": "Outer product con `+`: ogni cella è `i+j`."
+  },
+  "dotProduct": {
+    "title": "Prodotto scalare",
+    "prompt": "Calcola il prodotto scalare di 1 2 3 e 4 5 6.",
+    "result": "32",
+    "explanation": "`+.×` moltiplica elemento per elemento (`4 10 18`) e somma. Prodotto scalare classico."
+  },
+  "matrixMultiply": {
+    "title": "Prodotto matriciale",
+    "prompt": "Moltiplica una matrice 2×3 per una 3×2.",
+    "result": "22 28\n49 64",
+    "explanation": "Su matrici, `+.×` è la moltiplicazione matriciale standard: riga per colonna."
+  },
+  "binaryToInt": {
+    "title": "Da binario a intero",
+    "prompt": "Converti le cifre binarie 1 0 1 1 in un numero decimale.",
+    "result": "11",
+    "explanation": "`⊥` (decode) legge il vettore di destra come cifre nella base indicata a sinistra. `1011` in base 2 vale `11`."
+  },
+  "intToBinary8": {
+    "title": "Intero in binario 8-bit",
+    "prompt": "Codifica il numero 11 come otto cifre binarie.",
+    "result": "0 0 0 0 1 0 1 1",
+    "explanation": "`⊤` (encode) è l'inverso di `⊥`. `8⍴2` chiede otto cifre, tutte in base 2."
+  },
+  "hammingWeight": {
+    "title": "Peso di Hamming",
+    "prompt": "Conta quanti bit a 1 ha la rappresentazione su 8 bit di 11.",
+    "result": "3",
+    "explanation": "Codifichi `11` in 8 bit e poi `+/` somma le cifre. È il popcount."
+  },
+  "filterPositives": {
+    "title": "Tieni solo i positivi",
+    "prompt": "Tieni solo i valori strettamente positivi di ¯2 ¯1 0 1 2.",
+    "result": "1 2",
+    "explanation": "`0<v` produce la maschera `0 0 0 1 1`. `/` la usa per tenere solo gli elementi dove la maschera vale `1`."
+  },
+  "pascalRow": {
+    "title": "Riga del triangolo di Pascal",
+    "prompt": "Calcola la riga 6 del triangolo di Pascal.",
+    "result": "1 6 15 20 15 6 1",
+    "explanation": "`!` diadico è il coefficiente binomiale `(k su 6)`. Con `k` che spazia da `0` a `6` (cioè `¯1+⍳7`), ottieni l'intera riga."
+  },
+  "factorialReduce": {
+    "title": "Fattoriale via reduce",
+    "prompt": "Calcola 7! usando l'operatore di riduzione sulla moltiplicazione.",
+    "result": "5040",
+    "explanation": "`×/` su `1..7` moltiplica tutto: `7!`."
+  },
+  "palindromeNumeric": {
+    "title": "È un palindromo?",
+    "prompt": "Verifica se 1 2 3 2 1 si legge uguale da sinistra e da destra.",
+    "result": "1 (vero)",
+    "explanation": "Confronta il vettore con il suo rovescio: ottieni `1` ovunque se è palindromo. `∧/` (AND di tutti i bit) vale `1` solo se ogni posizione coincide."
+  },
+  "countA": {
+    "title": "Conta lettere",
+    "prompt": "Quante volte compare la lettera 'a' in 'banana'?",
+    "result": "3",
+    "explanation": "`'banana'='a'` confronta carattere per carattere producendo `0 1 0 1 0 1`. `+/` somma."
+  },
+  "countVowels": {
+    "title": "Conta vocali",
+    "prompt": "Quante vocali ci sono in 'computation'?",
+    "result": "5",
+    "explanation": "`∊` contro `'aeiou'` segna `1` sulle lettere che sono vocali. La somma le conta: `o, u, a, i, o`."
+  },
+  "findSubstring": {
+    "title": "Trova una sottostringa",
+    "prompt": "Trova ogni posizione in cui 'ana' compare dentro 'banana'.",
+    "result": "2 4",
+    "explanation": "`⍷` piazza un `1` nelle posizioni dove la stringa cercata inizia dentro quella più grande. `⍸` ne raccoglie gli indici."
+  },
+  "keepVowels": {
+    "title": "Filtra le vocali",
+    "prompt": "Tieni solo le vocali di 'computation'.",
+    "result": "ouaio",
+    "explanation": "Stessa maschera del conteggio vocali, ma usata in compressione (`/`) sulla stringa: sopravvivono solo le vocali."
+  },
+  "vectorMean": {
+    "title": "Media di un vettore",
+    "prompt": "Calcola la media di 4 8 15 16 23 42.",
+    "result": "18",
+    "explanation": "Somma `108` divisa per la lunghezza `6` dà `18`. Stesso schema di `average`, solo con un vettore più lungo."
+  },
+  "variance": {
+    "title": "Varianza",
+    "prompt": "Calcola la varianza di 2 4 4 4 5 5 7 9.",
+    "result": "4",
+    "explanation": "Media: `40÷8 = 5`. Scarti dalla media: `¯3 ¯1 ¯1 ¯1 0 0 2 4`. Al quadrato sommano `32`. Diviso `8` fa `4`. Questa è la varianza di popolazione."
+  },
+  "stddev": {
+    "title": "Deviazione standard",
+    "prompt": "Calcola la deviazione standard di 2 4 4 4 5 5 7 9.",
+    "result": "2",
+    "explanation": "Radice della varianza dell'esercizio precedente: `√4 = 2`."
+  },
+  "composeWithDfn": {
+    "title": "Definisci una funzione anonima",
+    "prompt": "Definisci una funzione inline che eleva al quadrato il suo argomento e applicala a 7.",
+    "result": "49",
+    "explanation": "Le graffe `{…}` definiscono una funzione anonima (una dfn). Dentro, `⍵` è l'argomento destro."
+  },
+  "defineAndReuse": {
+    "title": "Dai un nome a una funzione e riusala",
+    "prompt": "Lega il nome sq alla funzione che eleva al quadrato e applicala a 1..5.",
+    "result": "1 4 9 16 25",
+    "explanation": "`←` assegna un nome a una funzione, esattamente come faresti con una variabile. `⋄` separa più istruzioni sulla stessa riga."
+  },
+  "eachOperator": {
+    "title": "Operatore each",
+    "prompt": "Applica la funzione 'quadrato' a ogni elemento di 1 2 3 4.",
+    "result": "1 4 9 16",
+    "explanation": "`¨` applica la funzione un elemento alla volta. Qui ridondante (`*2` lavora già su vettore), ma serve a vedere il pattern."
+  },
+  "commute": {
+    "title": "Scambia gli argomenti",
+    "prompt": "Calcola 3 - 10 scrivendo prima 10.",
+    "result": "¯7",
+    "explanation": "`f⍨` scambia gli argomenti prima di applicare `f`. Quindi `10 -⍨ 3` esegue `3 - 10`."
+  },
+  "selfApply": {
+    "title": "Auto-applicazione",
+    "prompt": "Calcola 5+5 usando lo stesso numero su entrambi i lati.",
+    "result": "10",
+    "explanation": "Usato monadicamente, `f⍨ ⍵` equivale a `⍵ f ⍵`. Da cui `+⍨ 5` è `5+5`."
+  },
+  "manhattan": {
+    "title": "Funzione a due argomenti",
+    "prompt": "Definisci manhattan come distanza di Manhattan tra due vettori e chiamala su 1 2 3 e 4 6 8.",
+    "result": "12",
+    "explanation": "Dentro una dfn diadica `⍺` è l'argomento sinistro e `⍵` quello destro. Differenze elemento per elemento `¯3 ¯4 ¯5`, valori assoluti `3 4 5`, somma `12`. È la distanza a scacchiera."
+  },
+  "sumOfSquaresOneLine": {
+    "title": "Somma dei quadrati in una riga",
+    "prompt": "Calcola la somma dei quadrati di 1..5 usando each e reduce insieme.",
+    "result": "55",
+    "explanation": "`{⍵*2}¨⍳5` produce `1 4 9 16 25`. `+/` somma."
+  },
+  "indicesOfEvens": {
+    "title": "Indici dei valori pari",
+    "prompt": "Elenca le posizioni dei valori pari in 4 7 8 11 12.",
+    "result": "1 3 5",
+    "explanation": "`2|v` dà `0 1 0 1 0`. `0=` segna i pari con `1` ottenendo `1 0 1 0 1`. `⍸` ne restituisce le posizioni."
+  },
+  "replicateByVector": {
+    "title": "Replica per conteggi",
+    "prompt": "Ripeti 'a', 'b' e 'c' rispettivamente 1, 2 e 3 volte.",
+    "result": "abbccc",
+    "explanation": "`/` diadico replica ogni elemento di destra il numero di volte indicato dal corrispondente elemento di sinistra."
+  },
+  "expandZeros": {
+    "title": "Espandi con zeri",
+    "prompt": "Inserisci uno zero tra ogni coppia di valori in 7 8 9.",
+    "result": "7 0 8 0 9",
+    "explanation": "`\\` usa la maschera `1 0 1 0 1` come stampino: su un `1` mette il prossimo valore della sorgente, su uno `0` inserisce un riempitivo (zero per i numeri)."
+  },
+  "rotateVector": {
+    "title": "Ruota un vettore",
+    "prompt": "Ruota 1 2 3 4 5 di due posizioni a sinistra.",
+    "result": "3 4 5 1 2",
+    "explanation": "`⌽` diadico ruota. Un numero positivo a sinistra significa rotazione a sinistra di tante posizioni."
+  },
+  "medianOdd": {
+    "title": "Mediana (lunghezza dispari)",
+    "prompt": "Calcola la mediana di 5 1 9 3 7.",
+    "result": "5",
+    "explanation": "Ordina, calcola la posizione centrale `⌈5÷2 = 3`, e pesca quell'elemento. Solo per lunghezze dispari."
+  },
+  "countOccurrences": {
+    "title": "Conta le occorrenze",
+    "prompt": "Quante volte compare 2 dentro 1 2 3 2 4 2?",
+    "result": "3",
+    "explanation": "`2=v` produce la maschera dei due. La somma conta."
+  },
+  "isSortedAscending": {
+    "title": "È ordinato in crescente?",
+    "prompt": "Verifica se 1 2 3 5 4 è ordinato in crescente.",
+    "result": "0 (no)",
+    "explanation": "`1↓v` butta via il primo elemento, `¯1↓v` butta via l'ultimo. Confrontandoli con `≥` ottieni le coppie consecutive: `1 1 1 0`. `∧/` vale `0` perché `4` non è maggiore-uguale di `5`."
+  },
+  "primesUpTo20": {
+    "title": "Primi fino a 20",
+    "prompt": "Elenca tutti i numeri primi fino a 20.",
+    "result": "2 3 5 7 11 13 17 19",
+    "explanation": "L'idea di fondo: un numero è primo se ha esattamente due divisori (1 e sé stesso).\n\n`(⍳20)∘.|⍳20` costruisce una tabella in cui la cella `(i,j)` vale `i mod j`. `0=` la trasforma in `1` dove la divisione è esatta. `+⌿` somma per colonna, ottenendo il numero di divisori di ciascun candidato. `2=` isola quelli con esattamente due divisori. `/` filtra `⍳20` con quella maschera."
+  },
+  "sumOfDigits": {
+    "title": "Somma delle cifre",
+    "prompt": "Calcola la somma delle cifre decimali di 12345.",
+    "result": "15",
+    "explanation": "`⍕12345` formatta il numero nel vettore di caratteri `'12345'`. `⍳` diadico contro `'0123456789'` cerca ogni carattere fra le cifre, restituendo le posizioni in base 1: `2 3 4 5 6`. `¯1+` le riporta in `0..9` ottenendo `1 2 3 4 5`. `+/` somma `15`."
+  },
+  "stringLength": {
+    "title": "Lunghezza di una stringa",
+    "prompt": "Quanto è lunga la parola 'arrays'?",
+    "result": "6",
+    "explanation": "Una stringa è un vettore di caratteri, quindi `⍴` ne dà la lunghezza."
+  },
+  "reverseString": {
+    "title": "Inverti una stringa",
+    "prompt": "Inverti i caratteri di 'arrays'.",
+    "result": "syarra",
+    "explanation": "`⌽` funziona su qualunque vettore, anche di caratteri."
+  },
+  "indexOfLastOne": {
+    "title": "Posizione dell'ultimo 1",
+    "prompt": "Trova la posizione dell'ultimo 1 dentro 0 1 0 1 1 0 1 0.",
+    "result": "7",
+    "explanation": "`⍸` produce le posizioni di tutti gli `1`: `2 4 5 7`. `⌽` capovolge a `7 5 4 2`. `⊃` prende il primo: la posizione dell'ultimo `1` originale."
+  },
+  "inverse2x2": {
+    "title": "Inverti una matrice 2×2",
+    "prompt": "Inverti la matrice con righe 1 2 e 3 4.",
+    "result": "¯2    1\n 1.5 ¯0.5",
+    "explanation": "`⌹` monadico calcola l'inversa di una matrice quadrata. Determinante di `(1 2; 3 4)`: `1·4 - 2·3 = ¯2`, il resto segue dalla formula standard 2×2."
+  },
+  "hexDecode": {
+    "title": "Decodifica esadecimale",
+    "prompt": "Decodifica le cifre 1 0 0 lette in base 16.",
+    "result": "256",
+    "explanation": "Le cifre `1 0 0` in base 16 valgono `1·256 + 0·16 + 0 = 256`. È il familiare `0x100`."
+  },
+  "iversonPrimes": {
+    "title": "Indicatore di primalità",
+    "prompt": "Produci un indicatore 0/1 che dice se ogni numero da 1 a 10 è primo.",
+    "result": "0 1 1 0 1 0 1 0 0 0",
+    "explanation": "Stessa costruzione dei primi fino a 20, ma senza il filtro finale. Resta la maschera (un vettore di Iverson): `1` dove il numero è primo, `0` altrove."
+  },
+  "magnitudeSquared": {
+    "title": "Modulo al quadrato",
+    "prompt": "Calcola il modulo quadrato del vettore 3 4.",
+    "result": "25",
+    "explanation": "`3 4 * 2` eleva ogni elemento al quadrato (`9 16`). `+/` somma `25`. È il modulo al quadrato del vettore."
+  },
+  "l1Norm": {
+    "title": "Norma L1",
+    "prompt": "Calcola la norma L1 di ¯3 1 ¯4 1 5.",
+    "result": "14",
+    "explanation": "Valori assoluti `3 1 4 1 5`, somma `14`. Distanza alla Manhattan dall'origine."
+  },
+  "tailOfVector": {
+    "title": "Coda di un vettore",
+    "prompt": "Restituisci ogni elemento di 10 20 30 40 tranne il primo.",
+    "result": "20 30 40",
+    "explanation": "`1↓v` scarta il primo elemento."
+  },
+  "pascalSum": {
+    "title": "Somma di una riga di Pascal",
+    "prompt": "Calcola la somma della riga 8 del triangolo di Pascal. Il risultato deve essere 2 alla 8.",
+    "result": "256",
+    "explanation": "La somma dei coefficienti binomiali nella riga `n` del triangolo di Pascal vale sempre `2^n`. Qui `n=8`."
+  },
+  "indexOrigin": {
+    "title": "Origine degli indici",
+    "prompt": "Mostra l'origine degli indici dell'interprete.",
+    "result": "1",
+    "explanation": "`⎕IO` è la variabile di sistema che dice da quale indice partono i vettori. Questo interprete usa `1`, lo standard APL classico."
+  },
+  "alphabetSystem": {
+    "title": "Alfabeto maiuscolo",
+    "prompt": "Stampa l'alfabeto maiuscolo usando una costante di sistema.",
+    "result": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "explanation": "`⎕A` è una costante di sistema con l'intero alfabeto latino maiuscolo, già pronto come vettore di 26 caratteri."
+  },
+  "digitsSystem": {
+    "title": "Stringa delle cifre",
+    "prompt": "Stampa le dieci cifre decimali come stringa.",
+    "result": "0123456789",
+    "explanation": "`⎕D` è la stringa delle dieci cifre. Utile per mappare caratteri-cifra in valori numerici."
+  },
+  "currentTimestamp": {
+    "title": "Timestamp corrente",
+    "prompt": "Leggi il timestamp corrente come vettore.",
+    "result": "vettore di 7 numeri (anno mese giorno ora minuto secondo millisecondo)",
+    "explanation": "`⎕TS` fotografa l'istante corrente in sette interi."
+  },
+  "year": {
+    "title": "Anno corrente",
+    "prompt": "Estrai solo l'anno corrente dal timestamp.",
+    "result": "l'anno corrente (intero)",
+    "explanation": "`⊃⎕TS` prende il primo elemento del timestamp."
+  },
+  "alphabetReversed": {
+    "title": "Alfabeto al contrario",
+    "prompt": "Stampa l'alfabeto da Z ad A.",
+    "result": "ZYXWVUTSRQPONMLKJIHGFEDCBA",
+    "explanation": "`⌽⎕A` rovescia l'alfabeto."
+  },
+  "executeSimple": {
+    "title": "Esegui testo",
+    "prompt": "Analizza ed esegui la stringa '1+2' come se fosse digitata.",
+    "result": "3",
+    "explanation": "`⍎` (execute) prende una stringa e la valuta come se fosse codice APL scritto a mano."
+  },
+  "executeSum": {
+    "title": "Esegui una riduzione",
+    "prompt": "Esegui la stringa '+/⍳10' per ottenere 55.",
+    "result": "55",
+    "explanation": "Stessa idea: la stringa viene analizzata come una qualunque riga APL."
+  },
+  "executeMatrix": {
+    "title": "Esegui un'espressione di matrice",
+    "prompt": "Esegui la stringa '3 3 ⍴ ⍳9' per costruire una matrice 3×3.",
+    "result": "1 2 3\n4 5 6\n7 8 9",
+    "explanation": "La stringa contiene la formula completa della matrice. `⍎` la esegue come se l'avessi digitata."
+  },
+  "tradfnInc": {
+    "title": "Incremento in stile tradfn",
+    "prompt": "Definisci inc dentro un blocco ∇ … ∇ e applicala a 9.",
+    "result": "10",
+    "explanation": "I marcatori `∇ … ∇` delimitano una definizione di funzione tradizionale. Qui avvolgono una dfn semplice che aggiunge `1`."
+  },
+  "tradfnSum": {
+    "title": "Alias tradfn per la somma",
+    "prompt": "Lega tot a +/ usando un blocco ∇ e applicala a ⍳100.",
+    "result": "5050",
+    "explanation": "`tot` riceve l'alias di `+/` dentro `∇ … ∇`. Applicato a `1..100` dà la somma di Gauss."
+  },
+  "tradfnDistance": {
+    "title": "Tradfn per la distanza euclidea",
+    "prompt": "Dentro un blocco ∇, lega dist alla distanza euclidea e chiamala su 0 0 e 3 4.",
+    "result": "5",
+    "explanation": "Differenze, al quadrato, somma, radice quadrata. `√(9+16) = 5`."
+  },
+  "letterIndex": {
+    "title": "Indice di una lettera nell'alfabeto",
+    "prompt": "Trova la posizione di ogni lettera di 'CAT' nell'alfabeto.",
+    "result": "3 1 20",
+    "explanation": "`⎕A ⍳ 'CAT'` cerca ogni lettera nell'alfabeto e dice in che posizione la trova: C → 3, A → 1, T → 20."
+  },
+  "digitFromChar": {
+    "title": "Da caratteri-cifra a interi",
+    "prompt": "Trasforma i caratteri di '42' negli interi 4 e 2.",
+    "result": "4 2",
+    "explanation": "`⎕D ⍳ '42'` trova `'4'` e `'2'` nelle cifre, alle posizioni 5 e 3 (base 1). `¯1+` riporta nei valori `0..9`."
+  },
+  "executeBuildExpr": {
+    "title": "Costruisci ed esegui un'espressione",
+    "prompt": "Componi la stringa '×/' seguita da '1 2 3 4 5' ed eseguila.",
+    "result": "120",
+    "explanation": "Costruisce una stringa APL al volo: `⍕⍳5` produce `'1 2 3 4 5'`, la concatenazione antepone `'×/'`, e `⍎` esegue il sorgente risultante."
+  },
+  "matchEqualVectors": {
+    "title": "Confronto di due vettori uguali",
+    "prompt": "Verifica se 1 2 3 e 1 2 3 sono strutturalmente uguali.",
+    "result": "1",
+    "explanation": "`≡` restituisce 1 solo quando entrambi gli array hanno la stessa forma e ogni elemento coincide."
+  },
+  "matchUnequalVectors": {
+    "title": "Confronto di due vettori diversi",
+    "prompt": "Verifica se 1 2 3 e 1 2 4 sono strutturalmente uguali.",
+    "result": "0",
+    "explanation": "Le forme coincidono ma un elemento differisce, quindi `≡` restituisce 0."
+  },
+  "matchShapeMismatch": {
+    "title": "Confronto tra forme diverse",
+    "prompt": "Confronta due vettori di lunghezza diversa.",
+    "result": "0",
+    "explanation": "Quando le forme differiscono `≡` restituisce 0 senza ispezionare i singoli valori."
+  },
+  "depthScalar": {
+    "title": "Profondità di uno scalare",
+    "prompt": "Chiedi la profondità di annidamento dello scalare 5.",
+    "result": "0",
+    "explanation": "Il monadico `≡` restituisce 0 per ogni scalare semplice, perché non c'è annidamento."
+  },
+  "depthFlatVector": {
+    "title": "Profondità di un vettore piatto",
+    "prompt": "Chiedi la profondità di 1 2 3 4.",
+    "result": "1",
+    "explanation": "Un array semplice e non annidato ha profondità 1."
+  },
+  "tallyVector": {
+    "title": "Conta un vettore",
+    "prompt": "Conta gli elementi di 10 20 30 40 50.",
+    "result": "5",
+    "explanation": "Il monadico `≢` restituisce la lunghezza del primo asse. Per un vettore equivale al numero di elementi."
+  },
+  "tallyMatrixRows": {
+    "title": "Conta le righe di una matrice",
+    "prompt": "Quante righe ha una matrice 3 per 4?",
+    "result": "3",
+    "explanation": "`≢` misura il primo asse. Per una matrice è il numero di righe."
+  },
+  "notMatchVectors": {
+    "title": "Non corrisponde tra vettori",
+    "prompt": "Verifica che 1 2 3 e 1 2 4 non coincidano.",
+    "result": "1",
+    "explanation": "`≢` è la negazione logica di `≡`: 1 quando gli array differiscono per forma o per valori."
+  },
+  "palindromeWithMatch": {
+    "title": "Palindromo con corrisponde",
+    "prompt": "Inverti 1 2 3 2 1 e verifica che il risultato coincida con l'originale.",
+    "result": "1",
+    "explanation": "`⌽` inverte il vettore. `≡` conferma l'uguaglianza strutturale elemento per elemento."
+  },
+  "tallyStringLength": {
+    "title": "Lunghezza di una stringa con conta",
+    "prompt": "Quanti caratteri ha 'workbench'?",
+    "result": "9",
+    "explanation": "Su un vettore di caratteri `≢` restituisce la sua lunghezza, come `⍴` ma sempre come scalare."
+  },
+  "zildeShape": {
+    "title": "Forma di zilde",
+    "prompt": "Qual è la forma del vettore numerico vuoto ⍬?",
+    "result": "0",
+    "explanation": "`⍬` è il vettore numerico vuoto canonico, lunghezza 0, rango 1."
+  },
+  "sumOfEmpty": {
+    "title": "Somma di zilde",
+    "prompt": "Riduci ⍬ con la somma.",
+    "result": "0",
+    "explanation": "La riduzione di un vettore vuoto restituisce l'elemento neutro della funzione. Per `+` è 0."
+  },
+  "buildVectorFromZilde": {
+    "title": "Concatena su zilde",
+    "prompt": "Antepone ⍬ a 1 2 3.",
+    "result": "1 2 3",
+    "explanation": "Concatenare a zilde non cambia nulla. Utile per accumulare in un ciclo che parte vuoto."
+  },
+  "partitionCount": {
+    "title": "Conta i gruppi di una partizione",
+    "prompt": "Quanti gruppi produce 1 1 2 2 0 3 3 ⊆ 'abcdefg'?",
+    "result": "3",
+    "explanation": "`⊆` inizia un nuovo gruppo quando il valore sinistro sale (o ripete un valore positivo diverso) e scarta gli elementi dove il valore è 0."
+  },
+  "partitionFirstGroup": {
+    "title": "Primo gruppo di una partizione",
+    "prompt": "Estrai il primo gruppo della partizione di 'abcdefg' con 1 1 2 2 0 3 3.",
+    "result": "ab",
+    "explanation": "`⊃` prende il primo elemento del risultato partizionato, cioè il vettore di caratteri 'ab'."
+  },
+  "nestRaisesDepth": {
+    "title": "Nest aumenta la profondità",
+    "prompt": "Avvolgi 1 2 3 con ⊆ e controlla la nuova profondità.",
+    "result": "2",
+    "explanation": "`⊆` su un non-scalare lo racchiude in uno scalare contenitore, portando la profondità da 1 a 2."
+  },
+  "powerIncrement": {
+    "title": "Incrementa dieci volte",
+    "prompt": "Parti da 0 e somma 1 dieci volte con ⍣.",
+    "result": "10",
+    "explanation": "`f⍣N` applica `f` al proprio argomento `N` volte in sequenza. Equivale a un `for` stretto senza corpo da scrivere."
+  },
+  "powerDoubling": {
+    "title": "Raddoppia un valore otto volte",
+    "prompt": "Parti da 1 e raddoppialo otto volte.",
+    "result": "256",
+    "explanation": "Ogni iterazione moltiplica per 2. Dopo 8 iterazioni il valore è 2 alla 8, cioè 256."
+  },
+  "rankSumRows": {
+    "title": "Somma di ogni riga con rank",
+    "prompt": "Somma ogni riga di una matrice 3 per 4 di ⍳12.",
+    "result": "10 26 42",
+    "explanation": "`+/⍤1` dice: applica `+/` a ogni 1-cella (ogni riga). Il risultato è un vettore di somme per riga."
+  },
+  "atReplaceAtIndex": {
+    "title": "Sostituisci in un singolo indice",
+    "prompt": "Sostituisci la posizione 2 di 1 2 3 4 5 con 0 usando @.",
+    "result": "1 0 3 4 5",
+    "explanation": "`{0}@2` applica la funzione costante `{0}` all'indice 2 dell'argomento destro."
+  },
+  "atReplaceMany": {
+    "title": "Sostituisci più indici",
+    "prompt": "Sostituisci le posizioni 1, 3 e 5 di 10 20 30 40 50 con ¯1.",
+    "result": "¯1 20 ¯1 40 ¯1",
+    "explanation": "Quando l'operando destro di `@` è un vettore di indici, la funzione viene applicata su ciascuno di essi."
+  },
+  "quoteQuadShape": {
+    "title": "Forma di quote-quad",
+    "prompt": "Qual è la forma di ⍞?",
+    "result": "0",
+    "explanation": "In questo interprete `⍞` (I/O carattere su console) legge come vettore di caratteri vuoto, perché non c'è un terminale collegato."
+  },
+  "minReduce": {
+    "title": "Minimo via riduzione",
+    "prompt": "Trova il valore più piccolo di 4 2 7 1 9 3 con una riduzione.",
+    "result": "1",
+    "explanation": "`⌊` fra due numeri tiene il minore. `⌊/` lo applica a catena su tutto il vettore, lasciando il minimo globale."
+  },
+  "rangeSpread": {
+    "title": "Estensione di un vettore",
+    "prompt": "Calcola l'estensione (massimo meno minimo) di 5 1 9 3 7.",
+    "result": "8",
+    "explanation": "`⌈/` dà `9`, `⌊/` dà `1`. La differenza è l'estensione. Una riga per la dispersione statistica più semplice."
+  },
+  "countNonZero": {
+    "title": "Conta i valori non zero",
+    "prompt": "Quanti valori diversi da zero ci sono in 0 3 0 5 0 2?",
+    "result": "3",
+    "explanation": "`0 ≠ v` segna le posizioni il cui valore non è zero. `+/` somma i segni."
+  },
+  "allEqualToFive": {
+    "title": "Tutti uguali a 5",
+    "prompt": "Verifica che ogni elemento di 5 5 5 5 sia uguale a 5.",
+    "result": "1",
+    "explanation": "`v = 5` produce una maschera booleana. `∧/` è l'AND di tutti i bit, quindi vale `1` solo se ogni posizione combacia."
+  },
+  "anyTrue": {
+    "title": "Almeno un vero",
+    "prompt": "C'è almeno un 1 nel vettore 0 0 1 0 0?",
+    "result": "1",
+    "explanation": "`∨/` è l'OR di tutti i bit. Basta un singolo `1` perché la riduzione restituisca `1`."
+  },
+  "firstDifference": {
+    "title": "Differenze consecutive",
+    "prompt": "Calcola le differenze fra elementi consecutivi di 10 13 15 19.",
+    "result": "3 2 4",
+    "explanation": "`1↓v` butta via il primo elemento, `¯1↓v` butta via l'ultimo. La sottrazione posizione per posizione restituisce ogni passo fra vicini."
+  },
+  "arrayMaxFlat": {
+    "title": "Massimo in tutta una matrice",
+    "prompt": "Trova il valore più grande dentro una matrice 2×3 di 1 5 2 9 3 4.",
+    "result": "9",
+    "explanation": "La virgola appiattisce la matrice in vettore. `⌈/` lo riduce al singolo valore massimo."
+  },
+  "dropOnString": {
+    "title": "Scarta caratteri",
+    "prompt": "Scarta i primi due caratteri di 'apl'.",
+    "result": "l",
+    "explanation": "`↓` funziona sui vettori di caratteri esattamente come sui numerici."
+  },
+  "doubleNegation": {
+    "title": "Doppia negazione",
+    "prompt": "Applica due volte il meno monadico a 5.",
+    "result": "5",
+    "explanation": "Da destra: `-5` è `¯5`, poi `-` di nuovo riporta a `5`. Due cambi di segno si elidono."
+  },
+  "rightFoldSubtract": {
+    "title": "Sottrazione folded da destra",
+    "prompt": "Riduci 10 3 2 con la sottrazione, e spiega perché il risultato non è 5.",
+    "result": "9",
+    "explanation": "Le riduzioni APL piegano da destra. `-/ 10 3 2` è `10 - (3 - 2)`, cioè `10 - 1 = 9`. Una delle prime sorprese per chi arriva da altri linguaggi."
+  },
+  "encodeTimeOfDay": {
+    "title": "Secondi in h:m:s",
+    "prompt": "Converti 3725 secondi in ore, minuti e secondi.",
+    "result": "1 2 5",
+    "explanation": "`⊤` codifica un numero su una base mista. Con basi `24 60 60` divide `3725` in 1 ora, 2 minuti e 5 secondi."
+  },
+  "floorDivision": {
+    "title": "Divisione intera con arrotondamento",
+    "prompt": "Calcola 17 diviso 5 arrotondato per difetto.",
+    "result": "3",
+    "explanation": "`17÷5` è `3.4`. Il monadico `⌊` arrotonda verso meno infinito, ottenendo `3`."
+  },
+  "distinctCharCount": {
+    "title": "Lettere distinte in una parola",
+    "prompt": "Quante lettere distinte ci sono in 'mississippi'?",
+    "result": "4",
+    "explanation": "`∪` tiene una sola copia di ogni carattere: `m`, `i`, `s`, `p`. `⍴` ne riporta la lunghezza."
+  },
+  "matrixMaxByRow": {
+    "title": "Massimo per riga",
+    "prompt": "In una matrice 2×3 di 1 5 2 9 3 4, trova il massimo di ogni riga.",
+    "result": "5 9",
+    "explanation": "`⌈/` su una matrice riduce lungo l'ultimo asse: un massimo per riga. La riga 1 ha massimo `5`, la riga 2 ha `9`."
+  },
+  "countMatching": {
+    "title": "Conta i valori che combaciano",
+    "prompt": "Quante volte compare 7 in 7 3 7 1 7?",
+    "result": "3",
+    "explanation": "`7 = v` produce una maschera booleana di corrispondenze. `+/` somma il conteggio."
+  },
+  "harmonicMean": {
+    "title": "Media armonica",
+    "prompt": "Calcola la media armonica di 2 e 6.",
+    "result": "3",
+    "explanation": "Media armonica: `n` diviso la somma dei reciproci. Qui `2 ÷ (½+⅙) = 2 ÷ ⅔ = 3`. `÷v` produce i reciproci, `+/` li somma, `(⍴v)÷` divide."
+  },
+  "composeFunctions": {
+    "title": "Componi due funzioni",
+    "prompt": "Definisci f come +1, g come ×2, poi applica f dopo g a 5.",
+    "result": "11",
+    "explanation": "Da destra a sinistra: `g 5` è `10`, poi `f 10` è `11`. La composizione in APL è semplice giustapposizione."
+  },
+  "interleaveZeros": {
+    "title": "Intercala zeri",
+    "prompt": "Inserisci uno zero dopo ogni valore di 7 8 9 10.",
+    "result": "7 0 8 0 9 0 10",
+    "explanation": "L'espansione `\\` usa la maschera `1 0 1 0 1 0 1` come stampino: ogni `1` consuma il valore successivo della sorgente, ogni `0` inserisce un riempitivo (zero per i numerici)."
+  },
+  "clampUpper": {
+    "title": "Limite superiore a cinque",
+    "prompt": "Limita ogni valore di 3 7 9 2 10 a 5.",
+    "result": "3 5 5 2 5",
+    "explanation": "`⌊` diadico restituisce il minore tra i due argomenti. Con uno scalare a sinistra, ogni elemento di destra viene tagliato a quel soffitto."
+  },
+  "sumOfBoolean": {
+    "title": "Somma un vettore booleano",
+    "prompt": "Conta gli 1 in 1 0 1 1 0 1.",
+    "result": "4",
+    "explanation": "`+/` su un vettore 0/1 è un popcount: quanti bit valgono 1."
+  }
+}

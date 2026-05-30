@@ -1,0 +1,656 @@
+{
+  "plus": {
+    "name": "Plus",
+    "monadic": {
+      "title": "Identity",
+      "desc": "Returns X unchanged."
+    },
+    "dyadic": {
+      "title": "Add",
+      "desc": "Adds A and B element by element. Scalars broadcast over arrays."
+    }
+  },
+  "minus": {
+    "name": "Minus",
+    "monadic": {
+      "title": "Negate",
+      "desc": "Flips the sign of every element of X."
+    },
+    "dyadic": {
+      "title": "Subtract",
+      "desc": "Subtracts B from A element by element."
+    }
+  },
+  "times": {
+    "name": "Times",
+    "monadic": {
+      "title": "Sign",
+      "desc": "Returns ¯1 for negatives, 0 for zero, 1 for positives."
+    },
+    "dyadic": {
+      "title": "Multiply",
+      "desc": "Multiplies A and B element by element."
+    }
+  },
+  "divide": {
+    "name": "Divide",
+    "monadic": {
+      "title": "Reciprocal",
+      "desc": "Returns 1 divided by X."
+    },
+    "dyadic": {
+      "title": "Divide",
+      "desc": "Divides A by B element by element."
+    }
+  },
+  "power": {
+    "name": "Power",
+    "monadic": {
+      "title": "Exponential",
+      "desc": "Returns e raised to X (Euler's constant)."
+    },
+    "dyadic": {
+      "title": "Power",
+      "desc": "Raises A to the power of B."
+    }
+  },
+  "log": {
+    "name": "Logarithm",
+    "monadic": {
+      "title": "Natural log",
+      "desc": "Returns the natural logarithm of X (base e)."
+    },
+    "dyadic": {
+      "title": "Logarithm in base A",
+      "desc": "Returns the logarithm of B in base A."
+    }
+  },
+  "ceiling": {
+    "name": "Ceiling / Max",
+    "monadic": {
+      "title": "Ceiling",
+      "desc": "Rounds X up to the nearest integer."
+    },
+    "dyadic": {
+      "title": "Maximum",
+      "desc": "Returns the larger of A and B element by element."
+    }
+  },
+  "floor": {
+    "name": "Floor / Min",
+    "monadic": {
+      "title": "Floor",
+      "desc": "Rounds X down to the nearest integer."
+    },
+    "dyadic": {
+      "title": "Minimum",
+      "desc": "Returns the smaller of A and B element by element."
+    }
+  },
+  "residue": {
+    "name": "Absolute / Residue",
+    "monadic": {
+      "title": "Absolute value",
+      "desc": "Returns the magnitude of X (negatives become positives)."
+    },
+    "dyadic": {
+      "title": "Residue",
+      "desc": "Returns the remainder when B is divided by A."
+    }
+  },
+  "factorial": {
+    "name": "Factorial / Binomial",
+    "monadic": {
+      "title": "Factorial",
+      "desc": "Returns N! (the product 1×2×…×N)."
+    },
+    "dyadic": {
+      "title": "Binomial coefficient",
+      "desc": "Number of ways to choose A items from B (B choose A)."
+    }
+  },
+  "roll": {
+    "name": "Roll",
+    "monadic": {
+      "title": "Random integer",
+      "desc": "Returns a uniform random integer between 1 and X."
+    },
+    "exampleNotes": {
+      "mo0": "The result changes each time you run it."
+    }
+  },
+  "circle": {
+    "name": "Pi-times / Circular",
+    "monadic": {
+      "title": "Multiply by π",
+      "desc": "Returns X multiplied by π."
+    },
+    "dyadic": {
+      "title": "Circular family",
+      "desc": "A selects a circular function: 1 = sine, 2 = cosine, 3 = tangent, 0 = √(1-B²). Negative values give the inverse functions."
+    }
+  },
+  "lt": {
+    "name": "Less than",
+    "dyadic": {
+      "title": "Less than",
+      "desc": "Returns 1 where A is strictly less than B, 0 otherwise."
+    }
+  },
+  "le": {
+    "name": "Less or equal",
+    "dyadic": {
+      "title": "Less or equal",
+      "desc": "Returns 1 where A is less than or equal to B."
+    }
+  },
+  "eq": {
+    "name": "Equal",
+    "dyadic": {
+      "title": "Equal",
+      "desc": "Returns 1 where A equals B, 0 otherwise. Tolerance is used for floats."
+    }
+  },
+  "ge": {
+    "name": "Greater or equal",
+    "dyadic": {
+      "title": "Greater or equal",
+      "desc": "Returns 1 where A is greater than or equal to B."
+    }
+  },
+  "gt": {
+    "name": "Greater than",
+    "dyadic": {
+      "title": "Greater than",
+      "desc": "Returns 1 where A is strictly greater than B."
+    }
+  },
+  "ne": {
+    "name": "Not equal",
+    "dyadic": {
+      "title": "Not equal",
+      "desc": "Returns 1 where A differs from B, 0 where they match."
+    }
+  },
+  "match": {
+    "name": "Match",
+    "monadic": {
+      "title": "Depth",
+      "desc": "Maximum nesting level of X. 0 for a simple scalar, 1 for a simple array, more for nested arrays."
+    },
+    "dyadic": {
+      "title": "Match",
+      "desc": "Returns 1 if A and B have the same shape and matching values element by element, otherwise 0."
+    }
+  },
+  "notMatch": {
+    "name": "Not match",
+    "monadic": {
+      "title": "Tally",
+      "desc": "Length of the first axis of X. Returns 1 for a scalar."
+    },
+    "dyadic": {
+      "title": "Not match",
+      "desc": "Returns 0 if A and B match structurally, otherwise 1."
+    }
+  },
+  "and": {
+    "name": "And",
+    "dyadic": {
+      "title": "Logical AND",
+      "desc": "Returns 1 only when both A and B are 1. Operates on 0/1 values."
+    }
+  },
+  "or": {
+    "name": "Or",
+    "dyadic": {
+      "title": "Logical OR",
+      "desc": "Returns 1 when at least one of A or B is 1."
+    }
+  },
+  "nand": {
+    "name": "Nand",
+    "dyadic": {
+      "title": "NAND",
+      "desc": "The negation of AND: returns 0 only when both inputs are 1."
+    }
+  },
+  "nor": {
+    "name": "Nor",
+    "dyadic": {
+      "title": "NOR",
+      "desc": "The negation of OR: returns 1 only when both inputs are 0."
+    }
+  },
+  "not": {
+    "name": "Not",
+    "monadic": {
+      "title": "Logical NOT",
+      "desc": "Flips 0 to 1 and 1 to 0 over every element."
+    }
+  },
+  "shape": {
+    "name": "Shape / Reshape",
+    "monadic": {
+      "title": "Shape",
+      "desc": "Returns the dimensions of X as a vector (e.g. 2 3 for a 2-by-3 matrix)."
+    },
+    "dyadic": {
+      "title": "Reshape",
+      "desc": "Builds an array of shape A, filling it by cycling through the values of B."
+    }
+  },
+  "ravel": {
+    "name": "Ravel / Catenate",
+    "monadic": {
+      "title": "Ravel",
+      "desc": "Flattens X into a single vector, walking row by row."
+    },
+    "dyadic": {
+      "title": "Catenate",
+      "desc": "Joins A and B end-to-end along the last axis."
+    }
+  },
+  "table": {
+    "name": "Table / Catenate first",
+    "monadic": {
+      "title": "Table",
+      "desc": "Turns a vector into a one-column matrix."
+    },
+    "dyadic": {
+      "title": "Catenate first",
+      "desc": "Stacks A on top of B along the first axis."
+    }
+  },
+  "reverseLast": {
+    "name": "Reverse / Rotate",
+    "monadic": {
+      "title": "Reverse",
+      "desc": "Reverses the elements along the last axis."
+    },
+    "dyadic": {
+      "title": "Rotate",
+      "desc": "Shifts the elements of B by A positions to the left. Negative shifts go right."
+    }
+  },
+  "reverseFirst": {
+    "name": "Reverse / Rotate first",
+    "monadic": {
+      "title": "Reverse first axis",
+      "desc": "Reverses the elements along the first axis."
+    },
+    "dyadic": {
+      "title": "Rotate first axis",
+      "desc": "Shifts the rows of B by A positions."
+    }
+  },
+  "transpose": {
+    "name": "Transpose",
+    "monadic": {
+      "title": "Transpose",
+      "desc": "Swaps the axes of X. For a matrix, this is the usual transpose."
+    }
+  },
+  "iota": {
+    "name": "Iota / Index of",
+    "monadic": {
+      "title": "Index generator",
+      "desc": "Returns the integers from 1 to N."
+    },
+    "dyadic": {
+      "title": "Index of",
+      "desc": "Finds the first position of each element of B inside A. Missing elements return length(A)+1."
+    }
+  },
+  "take": {
+    "name": "Take",
+    "dyadic": {
+      "title": "Take",
+      "desc": "Takes A items from the start of B (or from the end if A is negative). Pads with a fill value if A is larger than B."
+    }
+  },
+  "drop": {
+    "name": "Drop",
+    "dyadic": {
+      "title": "Drop",
+      "desc": "Discards A items from B. Positive drops from the start, negative from the end."
+    }
+  },
+  "enclose": {
+    "name": "Enclose",
+    "monadic": {
+      "title": "Enclose",
+      "desc": "Wraps X inside a scalar so it can be carried as a single item."
+    }
+  },
+  "disclose": {
+    "name": "Disclose",
+    "monadic": {
+      "title": "Disclose",
+      "desc": "Returns the first element of X (the inverse of enclose)."
+    }
+  },
+  "member": {
+    "name": "Membership",
+    "dyadic": {
+      "title": "Member of",
+      "desc": "Returns 1 where each element of A appears anywhere in B."
+    }
+  },
+  "find": {
+    "name": "Find",
+    "dyadic": {
+      "title": "Find substring",
+      "desc": "Returns 1 at every starting position where A appears as a contiguous run inside B."
+    }
+  },
+  "unique": {
+    "name": "Unique / Union",
+    "monadic": {
+      "title": "Unique",
+      "desc": "Keeps each distinct value once, in the order it first appears."
+    },
+    "dyadic": {
+      "title": "Union",
+      "desc": "Joins A and B keeping only one copy of each value."
+    }
+  },
+  "intersect": {
+    "name": "Intersection",
+    "dyadic": {
+      "title": "Intersection",
+      "desc": "Returns the values that appear in both A and B."
+    }
+  },
+  "format": {
+    "name": "Format",
+    "monadic": {
+      "title": "Format as text",
+      "desc": "Returns the textual representation of X as a vector of characters."
+    }
+  },
+  "gradeUp": {
+    "name": "Grade up",
+    "monadic": {
+      "title": "Grade up",
+      "desc": "Returns the indices that would sort X in ascending order."
+    }
+  },
+  "gradeDown": {
+    "name": "Grade down",
+    "monadic": {
+      "title": "Grade down",
+      "desc": "Returns the indices that would sort X in descending order."
+    }
+  },
+  "partition": {
+    "name": "Partition",
+    "monadic": {
+      "title": "Nest",
+      "desc": "Wraps X in a scalar container if it is not already a simple scalar. Useful as a guarantee that depth is at least 1."
+    },
+    "dyadic": {
+      "title": "Partitioned enclose",
+      "desc": "Groups B into a nested vector. A new group starts whenever A rises to a positive value (or repeats a different positive value). Zero entries in A drop the matching item."
+    }
+  },
+  "where": {
+    "name": "Where",
+    "monadic": {
+      "title": "Indices of ones",
+      "desc": "Returns the positions where the boolean vector X holds 1."
+    }
+  },
+  "pick": {
+    "name": "Index / Pick",
+    "dyadic": {
+      "title": "Index along leading axes",
+      "desc": "Selects the element or slice of B sitting at index A along the leading axes."
+    }
+  },
+  "decode": {
+    "name": "Decode",
+    "dyadic": {
+      "title": "Base value",
+      "desc": "Converts digits B written in base A into a single scalar."
+    }
+  },
+  "encode": {
+    "name": "Encode",
+    "dyadic": {
+      "title": "Represent in base",
+      "desc": "Converts the scalar B into its digits in the bases listed in A."
+    }
+  },
+  "reduce": {
+    "name": "Reduce",
+    "monadic": {
+      "title": "Reduce along last axis",
+      "desc": "F/X applies F between consecutive elements of X, right to left, along the last axis."
+    }
+  },
+  "reduceFirst": {
+    "name": "Reduce first",
+    "monadic": {
+      "title": "Reduce along first axis",
+      "desc": "Like /, but reduces along the first axis (down each column of a matrix)."
+    }
+  },
+  "scan": {
+    "name": "Scan",
+    "monadic": {
+      "title": "Scan along last axis",
+      "desc": "Like reduce, but returns every running total instead of only the final one."
+    }
+  },
+  "scanFirst": {
+    "name": "Scan first",
+    "monadic": {
+      "title": "Scan along first axis",
+      "desc": "Cumulative running reduction, going down each column."
+    }
+  },
+  "each": {
+    "name": "Each",
+    "monadic": {
+      "title": "Apply to each item",
+      "desc": "F¨ X applies the function F to every item of X individually."
+    }
+  },
+  "commute": {
+    "name": "Commute / Selfie",
+    "monadic": {
+      "title": "Commute / Self-apply",
+      "desc": "Used monadically: F⍨ X equals X F X. Used dyadically: A F⍨ B equals B F A (it swaps the arguments)."
+    }
+  },
+  "dot": {
+    "name": "Inner product",
+    "dyadic": {
+      "title": "Inner product",
+      "desc": "A f.g B pairs the elements of A and B with g, then reduces with f. Use +.× for matrix multiplication."
+    }
+  },
+  "outer": {
+    "name": "Outer product",
+    "dyadic": {
+      "title": "Outer product",
+      "desc": "A ∘.f B builds a table by applying f to every pair (one from A, one from B)."
+    }
+  },
+  "powerOp": {
+    "name": "Power",
+    "monadic": {
+      "title": "Apply N times",
+      "desc": "f⍣N applies f to its argument N times in sequence. f⍣0 is the identity."
+    }
+  },
+  "rank": {
+    "name": "Rank",
+    "monadic": {
+      "title": "Apply to k-cells",
+      "desc": "f⍤k applies f to every k-cell of the right argument and reassembles the results. +/⍤1 on a matrix sums every row."
+    }
+  },
+  "at": {
+    "name": "At",
+    "monadic": {
+      "title": "Modify at indices",
+      "desc": "(f@I) X applies f to the elements of X at the positions named by I, leaving the rest unchanged."
+    }
+  },
+  "matInv": {
+    "name": "Matrix invert",
+    "monadic": {
+      "title": "Inverse",
+      "desc": "Returns the reciprocal of a scalar or the inverse of a 2×2 matrix."
+    }
+  },
+  "tackLeft": {
+    "name": "Left tack",
+    "monadic": {
+      "title": "Identity",
+      "desc": "Returns X unchanged."
+    },
+    "dyadic": {
+      "title": "Left",
+      "desc": "Returns A and discards B."
+    }
+  },
+  "tackRight": {
+    "name": "Right tack",
+    "monadic": {
+      "title": "Identity",
+      "desc": "Returns X unchanged."
+    },
+    "dyadic": {
+      "title": "Right",
+      "desc": "Returns B and discards A."
+    }
+  },
+  "assign": {
+    "name": "Assign",
+    "dyadic": {
+      "title": "Assignment",
+      "desc": "name ← value binds the right-hand side to the name on the left. It works for arrays and for function aliases like sum ← +/."
+    }
+  },
+  "diamond": {
+    "name": "Statement separator",
+    "monadic": {
+      "title": "Diamond",
+      "desc": "Separates two statements written on the same line."
+    }
+  },
+  "comment": {
+    "name": "Comment",
+    "monadic": {
+      "title": "Lamp",
+      "desc": "Everything from ⍝ to the end of the line is ignored."
+    }
+  },
+  "omega": {
+    "name": "Right argument",
+    "monadic": {
+      "title": "Right argument of a dfn",
+      "desc": "Inside braces, ⍵ refers to the value passed on the right."
+    }
+  },
+  "alpha": {
+    "name": "Left argument",
+    "dyadic": {
+      "title": "Left argument of a dfn",
+      "desc": "Inside braces, ⍺ refers to the value passed on the left. Only valid when the dfn is called dyadically."
+    }
+  },
+  "highMinus": {
+    "name": "High-minus",
+    "monadic": {
+      "title": "Negative literal",
+      "desc": "Used inside numeric literals to mark negative values. It is part of the number, not a subtraction."
+    }
+  },
+  "dfnOpen": {
+    "name": "Open brace",
+    "monadic": {
+      "title": "Open a dfn",
+      "desc": "Begins an anonymous function. Inside, ⍵ is the right argument and ⍺ is the left."
+    }
+  },
+  "dfnClose": {
+    "name": "Close brace",
+    "monadic": {
+      "title": "Close a dfn",
+      "desc": "Closes the body of an anonymous function."
+    }
+  },
+  "stringQuote": {
+    "name": "String quote",
+    "monadic": {
+      "title": "Character literal",
+      "desc": "Single quotes delimit a string. Double the quote inside a string to include one literal apostrophe."
+    }
+  },
+  "quad": {
+    "name": "Quad",
+    "monadic": {
+      "title": "System name",
+      "desc": "Prefix for built-in system names. ⎕IO is the index origin (1). ⎕A is the uppercase alphabet. ⎕D is the digit string. ⎕TS is the current timestamp."
+    }
+  },
+  "underscore": {
+    "name": "Underscore",
+    "monadic": {
+      "title": "Identifier character",
+      "desc": "Underscore is allowed inside variable names. It is not a primitive."
+    }
+  },
+  "del": {
+    "name": "Del",
+    "monadic": {
+      "title": "Function definition block",
+      "desc": "Wraps a single function-defining statement between two ∇ markers. Example: ∇ inc ← {⍵+1} ∇ binds inc to the squared function. Inside the block any normal APL expression is allowed."
+    }
+  },
+  "delta": {
+    "name": "Delta",
+    "monadic": {
+      "title": "Identifier character",
+      "desc": "Delta is allowed inside variable names, by convention used for changes or deltas."
+    }
+  },
+  "execute": {
+    "name": "Execute",
+    "monadic": {
+      "title": "Execute text as APL",
+      "desc": "Takes a character vector, parses it and runs it as APL, returning the value of the last statement."
+    }
+  },
+  "zilde": {
+    "name": "Zilde",
+    "monadic": {
+      "title": "Empty numeric vector",
+      "desc": "⍬ is the canonical empty numeric vector: shape 0, rank 1. Common as a starting accumulator and as the result of reductions over empty inputs."
+    }
+  },
+  "quoteQuad": {
+    "name": "Quote-quad",
+    "monadic": {
+      "title": "Character console I/O",
+      "desc": "Standard character console input/output. In this interpreter ⍞ reads as an empty character vector since no terminal stream is connected."
+    }
+  },
+  "_extras": {
+    "underscore": "Underscore (identifier character)",
+    "del": "Del (traditional function definition)",
+    "delta": "Delta (identifier character)",
+    "execute": "Execute (not implemented)",
+    "omega": "Right argument inside a dfn",
+    "alpha": "Left argument inside a dfn",
+    "quad": "Quad (system value, not implemented)",
+    "lbrace": "Open dfn",
+    "rbrace": "Close dfn",
+    "highMinus": "High-minus (negative literal)",
+    "stringQuote": "String quote"
+  }
+}

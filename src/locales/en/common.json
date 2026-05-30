@@ -1,0 +1,80 @@
+{
+  "brand": "APLamp",
+  "tagline": "Write, run, and learn APL.",
+  "home": "Home",
+  "homeTitle": "Back to archetipico.github.io",
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "workbench": {
+    "title": "Workbench",
+    "runHint": "Enter to run · Shift+Enter for newline",
+    "aplKeyHintOn": "APL input is active: every key produces the glyph drawn on it. Shift gives the secondary glyph in the top-right corner. Switch to ASCII to type normally.",
+    "aplKeyHintOff": "ASCII input is active: keys type their normal characters. Hold Alt and press a key to insert a single APL glyph, or switch the toggle above to APL.",
+    "inputModeTitle": "Toggle between APL and ASCII input",
+    "modeApl": "APL",
+    "modeAscii": "ASCII",
+    "placeholder": "Type APL here.  Try:  +/⍳100",
+    "clear": "Clear",
+    "run": "Run",
+    "history": "Session log",
+    "historyEmpty": "No runs yet. Start here.",
+    "keyboardOn": "Show keyboard",
+    "keyboardOff": "Hide keyboard",
+    "keyboardLabel": "On-screen APL keyboard",
+    "sendToRepl": "Insert",
+    "panelGlyphs": "Glyphs",
+    "panelExercises": "Exercises",
+    "bandReference": "Reference",
+    "bandExercises": "Exercises",
+    "notImplemented": "not implemented"
+  },
+  "glyphs": {
+    "title": "Glyph reference",
+    "intro": "Every symbol carries two meanings: one alone (monadic), one between two values (dyadic).",
+    "searchPlaceholder": "Search glyph, name, or category…",
+    "categoryAll": "All",
+    "cat": {
+      "arithmetic": "Arithmetic",
+      "comparison": "Comparison",
+      "logical": "Logical",
+      "structural": "Structural",
+      "selection": "Selection",
+      "operators": "Operators",
+      "misc": "Misc"
+    },
+    "monadicHeader": "Monadic",
+    "dyadicHeader": "Dyadic"
+  },
+  "exercises": {
+    "title": "Hands-on exercises",
+    "intro": "Each problem is paired with a worked APL solution. Many admit more than one; one is shown.",
+    "searchPlaceholder": "Search exercises…",
+    "difficultyAll": "All levels",
+    "diff": {
+      "easy": "Beginner",
+      "medium": "Intermediate",
+      "hard": "Advanced"
+    },
+    "showSolution": "Reveal",
+    "hideSolution": "Hide",
+    "run": "Run",
+    "solutionLabel": "Solution",
+    "outputLabel": "Expected output",
+    "reasoningLabel": "How it works"
+  },
+  "gate": {
+    "checking": "Loading.",
+    "challenge": "Hold the button to enter.",
+    "holdButton": "Hold to enter",
+    "blocked": "Automated access not allowed."
+  },
+  "guardian": {
+    "pasteBlocked": "Paste disabled. Type APL by hand.",
+    "rateLimited": "Too many runs. Wait a minute.",
+    "botDetected": "Action blocked.",
+    "dismiss": "Close"
+  }
+}

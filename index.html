@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <link rel="icon" type="image/svg+xml" href="/APLamp/favicon.svg" />
+    <link rel="apple-touch-icon" href="/APLamp/apple-touch-icon.png" />
+    <meta name="title" content="APLamp" />
+    <meta name="description" content="A browser playground for APL. REPL, on-screen keyboard, glyph reference, and a hundred graded exercises. Runs entirely in the page, no server." />
+    <meta name="keywords" content="APL, APL interpreter, APL online, APL REPL, APL keyboard, glyphs, exercises, array programming, learn APL" />
+    <meta name="author" content="archetipico" />
+    <meta name="theme-color" content="#ece2d0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://archetipico.github.io/APLamp/" />
+    <meta property="og:title" content="APLamp" />
+    <meta property="og:description" content="A browser playground for APL. REPL, on-screen keyboard, glyph reference, and a hundred graded exercises. Runs entirely in the page, no server." />
+    <meta property="og:image" content="https://archetipico.github.io/APLamp/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="APLamp, a browser playground for APL" />
+    <meta property="og:site_name" content="APLamp" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="APLamp" />
+    <meta name="twitter:description" content="A browser playground for APL. REPL, on-screen keyboard, glyph reference, and a hundred graded exercises." />
+    <meta name="twitter:image" content="https://archetipico.github.io/APLamp/og.png" />
+    <meta name="twitter:image:alt" content="APLamp, a browser playground for APL" />
+    <link rel="canonical" href="https://archetipico.github.io/APLamp/" />
+    <title>APLamp ⍝</title>
+    <script>
+      (function () {
+        try {
+          var m = document.cookie.match(/(?:^|; )mode=([^;]+)/);
+          var pref = m
+            ? decodeURIComponent(m[1])
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (pref === 'dark') document.documentElement.classList.add('dark');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', pref === 'dark' ? '#11141b' : '#ece2d0');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

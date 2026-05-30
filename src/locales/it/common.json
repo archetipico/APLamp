@@ -1,0 +1,80 @@
+{
+  "brand": "APLamp",
+  "tagline": "Scrivi, esegui e impara APL.",
+  "home": "Home",
+  "homeTitle": "Torna a archetipico.github.io",
+  "theme": {
+    "label": "Tema",
+    "light": "Chiaro",
+    "dark": "Scuro"
+  },
+  "workbench": {
+    "title": "Banco di lavoro",
+    "runHint": "Invio per eseguire · Maiusc+Invio per andare a capo",
+    "aplKeyHintOn": "Input APL attivo: ogni tasto produce il glifo disegnato sopra. Maiusc dà il glifo secondario in alto a destra. Passa a ASCII per scrivere normalmente.",
+    "aplKeyHintOff": "Input ASCII attivo: i tasti producono i caratteri normali. Tieni premuto Alt e premi un tasto per inserire un singolo glifo APL, oppure passa la modalità a APL qui sopra.",
+    "inputModeTitle": "Passa tra input APL e ASCII",
+    "modeApl": "APL",
+    "modeAscii": "ASCII",
+    "placeholder": "Scrivi APL qui.  Prova:  +/⍳100",
+    "clear": "Pulisci",
+    "run": "Esegui",
+    "history": "Cronologia",
+    "historyEmpty": "Nessuna esecuzione. Inizia da qui.",
+    "keyboardOn": "Mostra tastiera",
+    "keyboardOff": "Nascondi tastiera",
+    "keyboardLabel": "Tastiera APL su schermo",
+    "sendToRepl": "Inserisci",
+    "panelGlyphs": "Glifi",
+    "panelExercises": "Esercizi",
+    "bandReference": "Riferimento",
+    "bandExercises": "Esercizi",
+    "notImplemented": "non implementato"
+  },
+  "glyphs": {
+    "title": "Glifi APL",
+    "intro": "Ogni simbolo ha due significati: uno da solo (monadico), uno fra due valori (diadico).",
+    "searchPlaceholder": "Cerca per glifo, nome o categoria…",
+    "categoryAll": "Tutti",
+    "cat": {
+      "arithmetic": "Aritmetici",
+      "comparison": "Confronto",
+      "logical": "Logici",
+      "structural": "Struttura",
+      "selection": "Selezione",
+      "operators": "Operatori",
+      "misc": "Vari"
+    },
+    "monadicHeader": "Monadico",
+    "dyadicHeader": "Diadico"
+  },
+  "exercises": {
+    "title": "Esercizi pratici",
+    "intro": "Ogni esercizio è accompagnato da una soluzione APL svolta. Spesso esistono più soluzioni: ne viene mostrata una.",
+    "searchPlaceholder": "Cerca esercizi…",
+    "difficultyAll": "Tutti i livelli",
+    "diff": {
+      "easy": "Base",
+      "medium": "Medio",
+      "hard": "Avanzato"
+    },
+    "showSolution": "Mostra",
+    "hideSolution": "Nascondi",
+    "run": "Esegui",
+    "solutionLabel": "Soluzione",
+    "outputLabel": "Output atteso",
+    "reasoningLabel": "Come funziona"
+  },
+  "gate": {
+    "checking": "Caricamento.",
+    "challenge": "Tieni premuto per entrare.",
+    "holdButton": "Tieni premuto",
+    "blocked": "Accesso automatico non consentito."
+  },
+  "guardian": {
+    "pasteBlocked": "Incolla disattivato. Scrivi APL a mano.",
+    "rateLimited": "Troppe esecuzioni. Aspetta un minuto.",
+    "botDetected": "Azione bloccata.",
+    "dismiss": "Chiudi"
+  }
+}

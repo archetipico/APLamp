@@ -1,0 +1,656 @@
+{
+  "plus": {
+    "name": "Più",
+    "monadic": {
+      "title": "Identità",
+      "desc": "Restituisce X invariato."
+    },
+    "dyadic": {
+      "title": "Somma",
+      "desc": "Somma A e B elemento per elemento. Gli scalari si propagano sugli array."
+    }
+  },
+  "minus": {
+    "name": "Meno",
+    "monadic": {
+      "title": "Negazione",
+      "desc": "Inverte il segno di ogni elemento di X."
+    },
+    "dyadic": {
+      "title": "Sottrazione",
+      "desc": "Sottrae B da A elemento per elemento."
+    }
+  },
+  "times": {
+    "name": "Per",
+    "monadic": {
+      "title": "Segno",
+      "desc": "Restituisce ¯1 per i negativi, 0 per lo zero, 1 per i positivi."
+    },
+    "dyadic": {
+      "title": "Moltiplicazione",
+      "desc": "Moltiplica A e B elemento per elemento."
+    }
+  },
+  "divide": {
+    "name": "Diviso",
+    "monadic": {
+      "title": "Reciproco",
+      "desc": "Restituisce 1 diviso X."
+    },
+    "dyadic": {
+      "title": "Divisione",
+      "desc": "Divide A per B elemento per elemento."
+    }
+  },
+  "power": {
+    "name": "Potenza",
+    "monadic": {
+      "title": "Esponenziale",
+      "desc": "Restituisce e elevato a X (costante di Eulero)."
+    },
+    "dyadic": {
+      "title": "Potenza",
+      "desc": "Eleva A alla potenza B."
+    }
+  },
+  "log": {
+    "name": "Logaritmo",
+    "monadic": {
+      "title": "Logaritmo naturale",
+      "desc": "Restituisce il logaritmo naturale di X (in base e)."
+    },
+    "dyadic": {
+      "title": "Logaritmo in base A",
+      "desc": "Restituisce il logaritmo di B in base A."
+    }
+  },
+  "ceiling": {
+    "name": "Tetto / Massimo",
+    "monadic": {
+      "title": "Arrotonda per eccesso",
+      "desc": "Arrotonda X all'intero più vicino verso l'alto."
+    },
+    "dyadic": {
+      "title": "Massimo",
+      "desc": "Restituisce il maggiore tra A e B elemento per elemento."
+    }
+  },
+  "floor": {
+    "name": "Pavimento / Minimo",
+    "monadic": {
+      "title": "Arrotonda per difetto",
+      "desc": "Arrotonda X all'intero più vicino verso il basso."
+    },
+    "dyadic": {
+      "title": "Minimo",
+      "desc": "Restituisce il minore tra A e B elemento per elemento."
+    }
+  },
+  "residue": {
+    "name": "Valore assoluto / Resto",
+    "monadic": {
+      "title": "Valore assoluto",
+      "desc": "Restituisce il modulo di X (i negativi diventano positivi)."
+    },
+    "dyadic": {
+      "title": "Resto",
+      "desc": "Restituisce il resto della divisione di B per A."
+    }
+  },
+  "factorial": {
+    "name": "Fattoriale / Binomiale",
+    "monadic": {
+      "title": "Fattoriale",
+      "desc": "Restituisce N! (il prodotto 1×2×…×N)."
+    },
+    "dyadic": {
+      "title": "Coefficiente binomiale",
+      "desc": "Numero di modi per scegliere A elementi tra B (B su A)."
+    }
+  },
+  "roll": {
+    "name": "Tiro casuale",
+    "monadic": {
+      "title": "Intero casuale",
+      "desc": "Restituisce un intero casuale uniforme tra 1 e X."
+    },
+    "exampleNotes": {
+      "mo0": "Il risultato cambia a ogni esecuzione."
+    }
+  },
+  "circle": {
+    "name": "Pi-greco / Circolari",
+    "monadic": {
+      "title": "Moltiplica per π",
+      "desc": "Restituisce X moltiplicato per π."
+    },
+    "dyadic": {
+      "title": "Funzioni circolari",
+      "desc": "A sceglie la funzione: 1 = seno, 2 = coseno, 3 = tangente, 0 = √(1-B²). I valori negativi danno le funzioni inverse."
+    }
+  },
+  "lt": {
+    "name": "Minore di",
+    "dyadic": {
+      "title": "Minore di",
+      "desc": "Restituisce 1 dove A è strettamente minore di B, 0 altrimenti."
+    }
+  },
+  "le": {
+    "name": "Minore o uguale",
+    "dyadic": {
+      "title": "Minore o uguale",
+      "desc": "Restituisce 1 dove A è minore o uguale a B."
+    }
+  },
+  "eq": {
+    "name": "Uguale",
+    "dyadic": {
+      "title": "Uguale",
+      "desc": "Restituisce 1 dove A è uguale a B, 0 altrimenti. Sui float viene usata una tolleranza."
+    }
+  },
+  "ge": {
+    "name": "Maggiore o uguale",
+    "dyadic": {
+      "title": "Maggiore o uguale",
+      "desc": "Restituisce 1 dove A è maggiore o uguale a B."
+    }
+  },
+  "gt": {
+    "name": "Maggiore di",
+    "dyadic": {
+      "title": "Maggiore di",
+      "desc": "Restituisce 1 dove A è strettamente maggiore di B."
+    }
+  },
+  "ne": {
+    "name": "Diverso da",
+    "dyadic": {
+      "title": "Diverso da",
+      "desc": "Restituisce 1 dove A differisce da B, 0 dove coincidono."
+    }
+  },
+  "match": {
+    "name": "Corrisponde",
+    "monadic": {
+      "title": "Profondità",
+      "desc": "Livello massimo di annidamento di X. 0 per uno scalare semplice, 1 per un array semplice, di più per array annidati."
+    },
+    "dyadic": {
+      "title": "Corrisponde",
+      "desc": "Restituisce 1 se A e B hanno la stessa forma e valori uguali elemento per elemento, altrimenti 0."
+    }
+  },
+  "notMatch": {
+    "name": "Non corrisponde",
+    "monadic": {
+      "title": "Conta",
+      "desc": "Lunghezza del primo asse di X. Restituisce 1 per uno scalare."
+    },
+    "dyadic": {
+      "title": "Non corrisponde",
+      "desc": "Restituisce 0 se A e B corrispondono strutturalmente, altrimenti 1."
+    }
+  },
+  "and": {
+    "name": "E logico",
+    "dyadic": {
+      "title": "AND logico",
+      "desc": "Restituisce 1 solo se sia A sia B valgono 1. Opera su valori 0/1."
+    }
+  },
+  "or": {
+    "name": "O logico",
+    "dyadic": {
+      "title": "OR logico",
+      "desc": "Restituisce 1 se almeno uno tra A e B vale 1."
+    }
+  },
+  "nand": {
+    "name": "Nand",
+    "dyadic": {
+      "title": "NAND",
+      "desc": "Negazione di AND: restituisce 0 solo quando entrambi gli ingressi sono 1."
+    }
+  },
+  "nor": {
+    "name": "Nor",
+    "dyadic": {
+      "title": "NOR",
+      "desc": "Negazione di OR: restituisce 1 solo quando entrambi gli ingressi sono 0."
+    }
+  },
+  "not": {
+    "name": "Negazione",
+    "monadic": {
+      "title": "NOT logico",
+      "desc": "Trasforma 0 in 1 e 1 in 0 su ogni elemento."
+    }
+  },
+  "shape": {
+    "name": "Forma / Rimodella",
+    "monadic": {
+      "title": "Forma",
+      "desc": "Restituisce le dimensioni di X come vettore (per esempio 2 3 per una matrice 2×3)."
+    },
+    "dyadic": {
+      "title": "Rimodella",
+      "desc": "Costruisce un array di forma A, riempiendolo ciclicamente con i valori di B."
+    }
+  },
+  "ravel": {
+    "name": "Appiattisci / Concatena",
+    "monadic": {
+      "title": "Appiattisci",
+      "desc": "Trasforma X in un singolo vettore, percorrendolo riga per riga."
+    },
+    "dyadic": {
+      "title": "Concatena",
+      "desc": "Unisce A e B uno dopo l'altro lungo l'ultimo asse."
+    }
+  },
+  "table": {
+    "name": "Tabella / Concatena primo asse",
+    "monadic": {
+      "title": "Tabella",
+      "desc": "Trasforma un vettore in una matrice a una sola colonna."
+    },
+    "dyadic": {
+      "title": "Concatena primo asse",
+      "desc": "Impila A sopra B lungo il primo asse."
+    }
+  },
+  "reverseLast": {
+    "name": "Inverti / Ruota",
+    "monadic": {
+      "title": "Inverti",
+      "desc": "Inverte gli elementi lungo l'ultimo asse."
+    },
+    "dyadic": {
+      "title": "Ruota",
+      "desc": "Sposta gli elementi di B di A posizioni verso sinistra. Un valore negativo li sposta a destra."
+    }
+  },
+  "reverseFirst": {
+    "name": "Inverti / Ruota primo asse",
+    "monadic": {
+      "title": "Inverti primo asse",
+      "desc": "Inverte gli elementi lungo il primo asse."
+    },
+    "dyadic": {
+      "title": "Ruota primo asse",
+      "desc": "Sposta le righe di B di A posizioni."
+    }
+  },
+  "transpose": {
+    "name": "Trasposta",
+    "monadic": {
+      "title": "Trasposta",
+      "desc": "Scambia gli assi di X. Per una matrice è la trasposizione classica."
+    }
+  },
+  "iota": {
+    "name": "Iota / Indice di",
+    "monadic": {
+      "title": "Generatore di indici",
+      "desc": "Restituisce gli interi da 1 a N."
+    },
+    "dyadic": {
+      "title": "Indice di",
+      "desc": "Trova la prima posizione di ogni elemento di B dentro A. Gli elementi assenti danno lunghezza(A)+1."
+    }
+  },
+  "take": {
+    "name": "Prendi",
+    "dyadic": {
+      "title": "Prendi",
+      "desc": "Prende A elementi dall'inizio di B (o dalla coda se A è negativo). Riempie con un valore di padding se A supera la lunghezza di B."
+    }
+  },
+  "drop": {
+    "name": "Scarta",
+    "dyadic": {
+      "title": "Scarta",
+      "desc": "Scarta A elementi da B. Positivo scarta dall'inizio, negativo dalla coda."
+    }
+  },
+  "enclose": {
+    "name": "Racchiudi",
+    "monadic": {
+      "title": "Racchiudi",
+      "desc": "Avvolge X in uno scalare, in modo da poterlo trattare come singolo elemento."
+    }
+  },
+  "disclose": {
+    "name": "Estrai",
+    "monadic": {
+      "title": "Estrai",
+      "desc": "Restituisce il primo elemento di X (l'operazione inversa di racchiudi)."
+    }
+  },
+  "member": {
+    "name": "Appartenenza",
+    "dyadic": {
+      "title": "Appartiene a",
+      "desc": "Restituisce 1 dove un elemento di A è presente in B."
+    }
+  },
+  "find": {
+    "name": "Trova",
+    "dyadic": {
+      "title": "Trova sottosequenza",
+      "desc": "Restituisce 1 in ogni posizione di B dove inizia un'occorrenza contigua di A."
+    }
+  },
+  "unique": {
+    "name": "Unici / Unione",
+    "monadic": {
+      "title": "Elementi unici",
+      "desc": "Tiene un'unica copia di ogni valore, nell'ordine in cui appare per la prima volta."
+    },
+    "dyadic": {
+      "title": "Unione",
+      "desc": "Unisce A e B tenendo una sola copia di ogni valore."
+    }
+  },
+  "intersect": {
+    "name": "Intersezione",
+    "dyadic": {
+      "title": "Intersezione",
+      "desc": "Restituisce i valori presenti sia in A sia in B."
+    }
+  },
+  "format": {
+    "name": "Formatta",
+    "monadic": {
+      "title": "Formatta come testo",
+      "desc": "Restituisce la rappresentazione testuale di X come vettore di caratteri."
+    }
+  },
+  "gradeUp": {
+    "name": "Indici crescenti",
+    "monadic": {
+      "title": "Indici crescenti",
+      "desc": "Restituisce gli indici che ordinerebbero X in crescente."
+    }
+  },
+  "gradeDown": {
+    "name": "Indici decrescenti",
+    "monadic": {
+      "title": "Indici decrescenti",
+      "desc": "Restituisce gli indici che ordinerebbero X in decrescente."
+    }
+  },
+  "partition": {
+    "name": "Partizione",
+    "monadic": {
+      "title": "Nest",
+      "desc": "Avvolge X in uno scalare contenitore se non è già uno scalare semplice. Garantisce profondità almeno 1."
+    },
+    "dyadic": {
+      "title": "Partizionamento",
+      "desc": "Raggruppa B in un vettore annidato. Un nuovo gruppo inizia quando A sale a un valore positivo (o ripete un valore positivo diverso). Gli zeri in A scartano l'elemento corrispondente."
+    }
+  },
+  "where": {
+    "name": "Dove",
+    "monadic": {
+      "title": "Indici degli 1",
+      "desc": "Restituisce le posizioni in cui il vettore booleano X vale 1."
+    }
+  },
+  "pick": {
+    "name": "Seleziona",
+    "dyadic": {
+      "title": "Seleziona lungo gli assi iniziali",
+      "desc": "Restituisce l'elemento o la fetta di B che si trova all'indice A lungo gli assi iniziali."
+    }
+  },
+  "decode": {
+    "name": "Decodifica",
+    "dyadic": {
+      "title": "Valore da una base",
+      "desc": "Converte le cifre B scritte in base A in un unico scalare."
+    }
+  },
+  "encode": {
+    "name": "Codifica",
+    "dyadic": {
+      "title": "Rappresenta in una base",
+      "desc": "Converte lo scalare B nelle sue cifre secondo le basi elencate in A."
+    }
+  },
+  "reduce": {
+    "name": "Riduci",
+    "monadic": {
+      "title": "Riduci lungo l'ultimo asse",
+      "desc": "F/X applica F tra elementi consecutivi di X, da destra a sinistra, lungo l'ultimo asse."
+    }
+  },
+  "reduceFirst": {
+    "name": "Riduci primo asse",
+    "monadic": {
+      "title": "Riduci lungo il primo asse",
+      "desc": "Come /, ma la riduzione avviene lungo il primo asse (giù per le colonne)."
+    }
+  },
+  "scan": {
+    "name": "Scansiona",
+    "monadic": {
+      "title": "Scansiona lungo l'ultimo asse",
+      "desc": "Come reduce, ma restituisce ogni risultato intermedio invece del solo totale finale."
+    }
+  },
+  "scanFirst": {
+    "name": "Scansiona primo asse",
+    "monadic": {
+      "title": "Scansiona lungo il primo asse",
+      "desc": "Riduzione cumulata che scorre giù per le colonne."
+    }
+  },
+  "each": {
+    "name": "Ciascuno",
+    "monadic": {
+      "title": "Applica a ciascun elemento",
+      "desc": "F¨ X applica la funzione F a ogni singolo elemento di X."
+    }
+  },
+  "commute": {
+    "name": "Commuta / Selfie",
+    "monadic": {
+      "title": "Commuta / Auto-applica",
+      "desc": "Usata monadicamente: F⍨ X equivale a X F X. Usata diadicamente: A F⍨ B equivale a B F A (scambia gli argomenti)."
+    }
+  },
+  "dot": {
+    "name": "Prodotto interno",
+    "dyadic": {
+      "title": "Prodotto interno",
+      "desc": "A f.g B combina con g elemento per elemento e poi riduce con f. Per la moltiplicazione di matrici si usa +.×."
+    }
+  },
+  "outer": {
+    "name": "Prodotto esterno",
+    "dyadic": {
+      "title": "Prodotto esterno",
+      "desc": "A ∘.f B costruisce una tabella applicando f a ogni coppia (un elemento da A e uno da B)."
+    }
+  },
+  "powerOp": {
+    "name": "Potenza",
+    "monadic": {
+      "title": "Applica N volte",
+      "desc": "f⍣N applica f al proprio argomento N volte in sequenza. f⍣0 è l'identità."
+    }
+  },
+  "rank": {
+    "name": "Rank",
+    "monadic": {
+      "title": "Applica a k-celle",
+      "desc": "f⍤k applica f a ogni k-cella dell'argomento destro e riassembla i risultati. +/⍤1 su una matrice somma ogni riga."
+    }
+  },
+  "at": {
+    "name": "At",
+    "monadic": {
+      "title": "Modifica negli indici",
+      "desc": "(f@I) X applica f agli elementi di X nelle posizioni indicate da I, lasciando inalterati gli altri."
+    }
+  },
+  "matInv": {
+    "name": "Inversa di matrice",
+    "monadic": {
+      "title": "Inversa",
+      "desc": "Restituisce il reciproco di uno scalare o l'inversa di una matrice 2×2."
+    }
+  },
+  "tackLeft": {
+    "name": "Sinistra",
+    "monadic": {
+      "title": "Identità",
+      "desc": "Restituisce X invariato."
+    },
+    "dyadic": {
+      "title": "Sinistra",
+      "desc": "Restituisce A e scarta B."
+    }
+  },
+  "tackRight": {
+    "name": "Destra",
+    "monadic": {
+      "title": "Identità",
+      "desc": "Restituisce X invariato."
+    },
+    "dyadic": {
+      "title": "Destra",
+      "desc": "Restituisce B e scarta A."
+    }
+  },
+  "assign": {
+    "name": "Assegnazione",
+    "dyadic": {
+      "title": "Assegnazione",
+      "desc": "nome ← valore lega il valore di destra al nome di sinistra. Funziona sia per gli array sia per gli alias di funzione, come sum ← +/."
+    }
+  },
+  "diamond": {
+    "name": "Separatore di istruzioni",
+    "monadic": {
+      "title": "Diamante",
+      "desc": "Separa due istruzioni scritte sulla stessa riga."
+    }
+  },
+  "comment": {
+    "name": "Commento",
+    "monadic": {
+      "title": "Lampada",
+      "desc": "Tutto ciò che segue ⍝ fino a fine riga viene ignorato."
+    }
+  },
+  "omega": {
+    "name": "Argomento destro",
+    "monadic": {
+      "title": "Argomento destro di una dfn",
+      "desc": "Dentro le graffe, ⍵ si riferisce al valore passato a destra."
+    }
+  },
+  "alpha": {
+    "name": "Argomento sinistro",
+    "dyadic": {
+      "title": "Argomento sinistro di una dfn",
+      "desc": "Dentro le graffe, ⍺ si riferisce al valore passato a sinistra. Valido solo quando la dfn è chiamata in modo diadico."
+    }
+  },
+  "highMinus": {
+    "name": "Meno alto",
+    "monadic": {
+      "title": "Letterale negativo",
+      "desc": "Si usa nei letterali numerici per indicare un valore negativo. Fa parte del numero, non è una sottrazione."
+    }
+  },
+  "dfnOpen": {
+    "name": "Graffa aperta",
+    "monadic": {
+      "title": "Apre una dfn",
+      "desc": "Inizia una funzione anonima. Al suo interno, ⍵ è l'argomento destro e ⍺ è quello sinistro."
+    }
+  },
+  "dfnClose": {
+    "name": "Graffa chiusa",
+    "monadic": {
+      "title": "Chiude una dfn",
+      "desc": "Chiude il corpo di una funzione anonima."
+    }
+  },
+  "stringQuote": {
+    "name": "Apice di stringa",
+    "monadic": {
+      "title": "Letterale di caratteri",
+      "desc": "Gli apici singoli delimitano una stringa. Per inserire un apice letterale, raddoppialo all'interno della stringa."
+    }
+  },
+  "quad": {
+    "name": "Quad",
+    "monadic": {
+      "title": "Nome di sistema",
+      "desc": "Prefisso per nomi di sistema integrati. ⎕IO è l'origine degli indici (1). ⎕A è l'alfabeto maiuscolo. ⎕D è la stringa di cifre. ⎕TS è il timestamp corrente."
+    }
+  },
+  "underscore": {
+    "name": "Trattino basso",
+    "monadic": {
+      "title": "Carattere per identificatori",
+      "desc": "Il trattino basso è ammesso nei nomi di variabile. Non è una primitiva."
+    }
+  },
+  "del": {
+    "name": "Del",
+    "monadic": {
+      "title": "Blocco di definizione di funzione",
+      "desc": "Racchiude un'unica istruzione di definizione tra due marcatori ∇. Esempio: ∇ inc ← {⍵+1} ∇ lega inc alla funzione. All'interno è ammessa qualunque espressione APL."
+    }
+  },
+  "delta": {
+    "name": "Delta",
+    "monadic": {
+      "title": "Carattere per identificatori",
+      "desc": "Il delta è ammesso nei nomi di variabile, per convenzione usato per indicare variazioni o incrementi."
+    }
+  },
+  "execute": {
+    "name": "Esegui",
+    "monadic": {
+      "title": "Esegue testo come APL",
+      "desc": "Prende un vettore di caratteri, lo analizza e lo esegue come APL, restituendo il valore dell'ultima istruzione."
+    }
+  },
+  "zilde": {
+    "name": "Zilde",
+    "monadic": {
+      "title": "Vettore numerico vuoto",
+      "desc": "⍬ è il vettore numerico vuoto canonico: forma 0, rango 1. Frequente come accumulatore iniziale e come risultato di riduzioni su input vuoti."
+    }
+  },
+  "quoteQuad": {
+    "name": "Quote-quad",
+    "monadic": {
+      "title": "I/O carattere su console",
+      "desc": "Standard input/output di caratteri. In questo interprete ⍞ legge come vettore di caratteri vuoto, perché non c'è un terminale collegato."
+    }
+  },
+  "_extras": {
+    "underscore": "Trattino basso (carattere per identificatori)",
+    "del": "Del (definizione di funzione tradizionale)",
+    "delta": "Delta (carattere per identificatori)",
+    "execute": "Esegui (non implementato)",
+    "omega": "Argomento destro di una dfn",
+    "alpha": "Argomento sinistro di una dfn",
+    "quad": "Quad (valore di sistema, non implementato)",
+    "lbrace": "Apre dfn",
+    "rbrace": "Chiude dfn",
+    "highMinus": "Meno alto (letterale negativo)",
+    "stringQuote": "Apice per stringhe"
+  }
+}

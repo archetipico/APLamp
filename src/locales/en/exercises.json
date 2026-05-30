@@ -1,0 +1,944 @@
+{
+  "sum1to10": {
+    "title": "Sum from 1 to 10",
+    "prompt": "Compute the sum of the integers from 1 to 10.",
+    "result": "55",
+    "explanation": "`⍳10` spits out `1 2 … 10`. `+/` slips a `+` between each pair and folds the whole thing down to a number. Gauss's sum."
+  },
+  "product1to5": {
+    "title": "Product from 1 to 5",
+    "prompt": "Compute the product of the integers from 1 to 5 (in other words, 5 factorial).",
+    "result": "120",
+    "explanation": "Same machinery as `+/`, only with multiplication: `1×2×3×4×5`. That is `5!`."
+  },
+  "vectorMin": {
+    "title": "Minimum of a vector",
+    "prompt": "Find the smallest value in 3 1 4 1 5 9 2 6.",
+    "result": "1",
+    "explanation": "`⌊` between two numbers returns the smaller. `⌊/` runs it across the vector until a single value is left: the minimum."
+  },
+  "vectorMax": {
+    "title": "Maximum of a vector",
+    "prompt": "Find the largest value in 3 1 4 1 5 9 2 6.",
+    "result": "9",
+    "explanation": "Mirror of `⌊/`, using `⌈` which keeps the larger of any two numbers."
+  },
+  "average": {
+    "title": "Arithmetic mean",
+    "prompt": "Compute the average of 2 4 6 8 10.",
+    "result": "6",
+    "explanation": "`+/` gives the sum `30`, `⍴` on a vector returns the length `5`. Divide and you have the mean."
+  },
+  "length": {
+    "title": "Length of a vector",
+    "prompt": "How many elements does 1 1 2 3 5 8 13 contain?",
+    "result": "7",
+    "explanation": "For a plain vector, shape and length are the same thing. `⍴` tells you straight away."
+  },
+  "firstNEvens": {
+    "title": "First even numbers",
+    "prompt": "Generate the first ten positive even integers.",
+    "result": "2 4 6 8 10 12 14 16 18 20",
+    "explanation": "`⍳10` produces `1..10`. Multiply every element by 2 and you get the even sequence."
+  },
+  "firstNOdds": {
+    "title": "First odd numbers",
+    "prompt": "Generate the first ten positive odd integers.",
+    "result": "1 3 5 7 9 11 13 15 17 19",
+    "explanation": "Build the evens as above, then subtract 1 from each. Watch out: `¯1` is the negative constant, not the operator `-` applied to `1`."
+  },
+  "squares": {
+    "title": "Squares",
+    "prompt": "Compute the squares of the integers from 1 to 10.",
+    "result": "1 4 9 16 25 36 49 64 81 100",
+    "explanation": "Recurring trap: in APL `*` is power, not multiplication. `(⍳10)*2` squares every element."
+  },
+  "cubes": {
+    "title": "Cubes",
+    "prompt": "Compute the cubes of the integers from 1 to 5.",
+    "result": "1 8 27 64 125",
+    "explanation": "Like squares, with exponent `3`."
+  },
+  "reverseVector": {
+    "title": "Reverse a vector",
+    "prompt": "Reverse the order of 1 2 3 4 5.",
+    "result": "5 4 3 2 1",
+    "explanation": "Monadic `⌽` flips a vector along the last axis."
+  },
+  "sortAscending": {
+    "title": "Sort ascending",
+    "prompt": "Sort 3 1 4 1 5 9 2 6 in ascending order.",
+    "result": "1 1 2 3 4 5 6 9",
+    "explanation": "Key insight: `⍋` does not sort the vector. It returns the **recipe** of positions to follow in order to read it sorted.\n\nOn `3 1 4 1 5 9 2 6` the smallest value (the first `1`) sits at position 2. The next smallest (the other `1`) sits at position 4. Then `2` at position 7, `3` at position 1, and so on. The resulting recipe is `2 4 7 1 3 5 8 6`.\n\nThen `⍵[...]` executes the recipe: it picks from `⍵` at those indices, in order. The sorted vector falls out.\n\nThe reason APL splits the two steps: the same recipe `⍋⍵` can sort a second, parallel vector (for example names ordered by age), which would be impossible if `⍋` consumed the indices on its own."
+  },
+  "sortDescending": {
+    "title": "Sort descending",
+    "prompt": "Sort 3 1 4 1 5 9 2 6 in descending order.",
+    "result": "9 6 5 4 3 2 1 1",
+    "explanation": "Same idea as `⍋`, but `⍒` produces the recipe for reading in descending order."
+  },
+  "catenateVectors": {
+    "title": "Catenate two vectors",
+    "prompt": "Join 1 2 3 with 4 5 into a single vector.",
+    "result": "1 2 3 4 5",
+    "explanation": "The comma glues two vectors along the last axis."
+  },
+  "firstElement": {
+    "title": "First element",
+    "prompt": "Take the first element of 10 20 30.",
+    "result": "10",
+    "explanation": "Monadic `⊃` (first / disclose) pulls out the first element."
+  },
+  "lastElement": {
+    "title": "Last element",
+    "prompt": "Take the last element of 10 20 30.",
+    "result": "30",
+    "explanation": "Reverse with `⌽`, then take the first. A classic trick for grabbing the last element without knowing the length."
+  },
+  "dropFirst": {
+    "title": "Drop the first element",
+    "prompt": "Remove the first element of 1 2 3 4 5.",
+    "result": "2 3 4 5",
+    "explanation": "`↓` with a positive count throws that many elements off the front."
+  },
+  "dropLast": {
+    "title": "Drop the last element",
+    "prompt": "Remove the last element of 1 2 3 4 5.",
+    "result": "1 2 3 4",
+    "explanation": "`↓` with a negative count drops from the tail."
+  },
+  "takeFirst3": {
+    "title": "Take the first three",
+    "prompt": "Take the first three elements of 10 20 30 40 50.",
+    "result": "10 20 30",
+    "explanation": "`↑` with a positive count grabs the first N. Opposite of `↓`."
+  },
+  "takeLast3": {
+    "title": "Take the last three",
+    "prompt": "Take the last three elements of 10 20 30 40 50.",
+    "result": "30 40 50",
+    "explanation": "`↑` with a negative count grabs from the tail."
+  },
+  "evenMask": {
+    "title": "Boolean mask of even values",
+    "prompt": "Build a 0/1 mask marking the even values among 1..10.",
+    "result": "0 1 0 1 0 1 0 1 0 1",
+    "explanation": "`2|⍳10` is the remainder mod 2 for each element. Comparing it with `0` puts a `1` exactly on the even ones."
+  },
+  "countEvens": {
+    "title": "Count the even numbers",
+    "prompt": "How many even integers are there between 1 and 50?",
+    "result": "25",
+    "explanation": "The same even-mask, now over `1..50`. `+/` sums the `1`s of the mask: one per even number."
+  },
+  "sumEvens": {
+    "title": "Sum the even numbers",
+    "prompt": "Sum the even integers between 1 and 100.",
+    "result": "2550",
+    "explanation": "Even-mask of `1..100`, then `/` uses it to keep only the elements where the mask holds `1` (the evens themselves). `+/` closes the sum."
+  },
+  "squareRoot": {
+    "title": "Square root",
+    "prompt": "Compute the square root of 144.",
+    "result": "12",
+    "explanation": "Raising a number to `0.5` is the square root."
+  },
+  "hypotenuse": {
+    "title": "Pythagorean hypotenuse",
+    "prompt": "Compute the hypotenuse of a right triangle with legs 3 and 4.",
+    "result": "5",
+    "explanation": "`3² + 4² = 25`, and the square root of `25` is `5`. Pythagoras in one line."
+  },
+  "absoluteValues": {
+    "title": "Absolute values",
+    "prompt": "Compute the absolute value of every element of ¯3 ¯1 0 2 4.",
+    "result": "3 1 0 2 4",
+    "explanation": "Monadic `|` is the magnitude, the distance from zero."
+  },
+  "negateVector": {
+    "title": "Negate a vector",
+    "prompt": "Negate every element of 1 ¯2 3 ¯4.",
+    "result": "¯1 2 ¯3 4",
+    "explanation": "Monadic `-` flips the sign of every element."
+  },
+  "rollDie": {
+    "title": "Roll a die",
+    "prompt": "Roll a single six-sided die.",
+    "result": "a random integer between 1 and 6",
+    "explanation": "Monadic `?` draws a random number between `1` and its argument."
+  },
+  "rollFiveDice": {
+    "title": "Roll five dice",
+    "prompt": "Roll five six-sided dice.",
+    "result": "five random integers between 1 and 6",
+    "explanation": "`5⍴6` builds the vector `6 6 6 6 6`. `?` over a vector rolls one die per element."
+  },
+  "piAndE": {
+    "title": "π and e",
+    "prompt": "Compute π and the base of the natural logarithm e.",
+    "result": "3.14159265… 2.71828182…",
+    "explanation": "Monadic `○` multiplies its argument by π, so `○1` is π. `*1` is `e¹ = e`. The comma sets them side by side."
+  },
+  "fToC": {
+    "title": "Fahrenheit to Celsius",
+    "prompt": "Convert 32, 100 and 212 from Fahrenheit to Celsius.",
+    "result": "0 37.778 100",
+    "explanation": "APL reads right to left. First `32 100 212 - 32` produces `0 68 180`, then everything is multiplied by `5÷9`."
+  },
+  "cToF": {
+    "title": "Celsius to Fahrenheit",
+    "prompt": "Convert 0, 37 and 100 from Celsius to Fahrenheit.",
+    "result": "32 98.6 212",
+    "explanation": "Multiply by `9÷5` (right to left, as always) and add `32`."
+  },
+  "signOfEach": {
+    "title": "Sign of each value",
+    "prompt": "Compute the sign of every element of ¯3 0 4 ¯7.",
+    "result": "¯1 0 1 ¯1",
+    "explanation": "Monadic `×` is the signum: `¯1`, `0` or `1` depending on the sign."
+  },
+  "ceilingFloor": {
+    "title": "Ceiling and floor",
+    "prompt": "Compute the ceiling and the floor of 3.7.",
+    "result": "4 3",
+    "explanation": "`⌈` rounds up to the nearest integer, `⌊` rounds down. The comma puts them next to each other."
+  },
+  "sumOfSquares": {
+    "title": "Sum of squares",
+    "prompt": "Compute the sum of the squares of 1..10.",
+    "result": "385",
+    "explanation": "`(⍳10)*2` yields `1 4 9 … 100`, then `+/` sums."
+  },
+  "indicesOfOnes": {
+    "title": "Positions of the ones",
+    "prompt": "List the positions of the 1s in 0 1 0 1 1 0.",
+    "result": "2 4 5",
+    "explanation": "`⍸` returns the positions where a boolean vector holds `1`."
+  },
+  "membershipTest": {
+    "title": "Membership test",
+    "prompt": "Which of 1 2 3 4 5 belong to 2 4 6?",
+    "result": "0 1 0 1 0",
+    "explanation": "`∊` walks the left vector and marks `1` whenever the element shows up on the right, `0` otherwise."
+  },
+  "positionOfItem": {
+    "title": "Position of an item",
+    "prompt": "Find the position of 7 inside 2 5 7 11.",
+    "result": "3",
+    "explanation": "Dyadic `⍳` looks for the right-hand value inside the left vector and returns the first index where it appears."
+  },
+  "cumulativeSum": {
+    "title": "Running totals",
+    "prompt": "Compute the running totals of 1..5.",
+    "result": "1 3 6 10 15",
+    "explanation": "`\\` is the version of `/` that keeps the intermediate values. `+\\` produces `1`, `1+2`, `1+2+3`, and so on."
+  },
+  "cumulativeProduct": {
+    "title": "Running products",
+    "prompt": "Compute the running products of 1..5.",
+    "result": "1 2 6 24 120",
+    "explanation": "Running totals with `×`. Each step is a partial factorial."
+  },
+  "runningMax": {
+    "title": "Running maximum",
+    "prompt": "Compute the running maximum of 3 1 4 1 5 9 2 6.",
+    "result": "3 3 4 4 5 9 9 9",
+    "explanation": "At every position, `⌈\\` keeps the largest value seen so far."
+  },
+  "argmax": {
+    "title": "Index of the maximum",
+    "prompt": "Find the index of the largest element in 3 1 4 1 5 9 2 6.",
+    "result": "6",
+    "explanation": "`⍒` is the descending recipe; its first entry is the position of the maximum. The `9` sits in the sixth slot."
+  },
+  "argmin": {
+    "title": "Index of the minimum",
+    "prompt": "Find the index of the smallest element in 3 1 4 1 5 9 2 6.",
+    "result": "2",
+    "explanation": "Mirror of argmax: `⍋` is the ascending recipe and its first entry is the position of the minimum."
+  },
+  "topThree": {
+    "title": "Three largest values",
+    "prompt": "Return the three largest values of 5 1 9 3 7 2 8.",
+    "result": "9 8 7",
+    "explanation": "`{⍵[⍒⍵]}` sorts descending, producing `9 8 7 5 3 2 1`. Then `3↑` grabs the first three."
+  },
+  "distinctValues": {
+    "title": "Distinct values",
+    "prompt": "List the distinct values of 1 2 2 3 1 4 4.",
+    "result": "1 2 3 4",
+    "explanation": "Monadic `∪` keeps one copy of every value, in first-seen order."
+  },
+  "countDistinct": {
+    "title": "Count distinct values",
+    "prompt": "How many distinct values are there in 1 2 2 3 1 4 4?",
+    "result": "4",
+    "explanation": "Take the unique values and read off the length with `⍴`."
+  },
+  "unionVectors": {
+    "title": "Union of two vectors",
+    "prompt": "Compute the union of 1 2 3 and 3 4 5.",
+    "result": "1 2 3 4 5",
+    "explanation": "Dyadic `∪` fuses the two vectors and drops duplicates."
+  },
+  "intersectionVectors": {
+    "title": "Intersection of two vectors",
+    "prompt": "Compute the intersection of 1 2 3 4 and 3 4 5.",
+    "result": "3 4",
+    "explanation": "`∩` keeps only the elements present in both vectors."
+  },
+  "bitmaskToPmOne": {
+    "title": "Booleans to ±1",
+    "prompt": "Map the booleans 0 1 0 1 1 to the values ¯1 1 ¯1 1 1.",
+    "result": "¯1 1 ¯1 1 1",
+    "explanation": "Common trick: double the bit and shift down by one. `0` becomes `¯1+0 = ¯1`, `1` becomes `¯1+2 = 1`. Useful when a boolean mask has to turn into signs."
+  },
+  "clampZeroOne": {
+    "title": "Clamp to [0, 1]",
+    "prompt": "Clamp the values ¯1 0.5 2 to the interval between 0 and 1.",
+    "result": "0 0.5 1",
+    "explanation": "Right to left, as always. `1 ⌊ ¯1 0.5 2` imposes a ceiling of `1`, yielding `¯1 0.5 1`. Then `0 ⌈ …` raises the floor to `0`. Clamp in two strokes."
+  },
+  "replaceNegWithZero": {
+    "title": "Zero out the negatives",
+    "prompt": "Replace any negative value of ¯3 ¯1 0 2 4 with zero.",
+    "result": "0 0 0 2 4",
+    "explanation": "`0 ⌈ v` keeps the larger of `0` and each element. Negatives get lifted to `0`."
+  },
+  "reshape3x4": {
+    "title": "Reshape into a 3×4 matrix",
+    "prompt": "Reshape 1..12 into a 3-row, 4-column matrix.",
+    "result": " 1  2  3  4\n 5  6  7  8\n 9 10 11 12",
+    "explanation": "Dyadic `⍴` fills the requested shape with the right-hand vector, row by row."
+  },
+  "rowSums": {
+    "title": "Row sums",
+    "prompt": "Sum each row of a 3×4 matrix.",
+    "result": "10 26 42",
+    "explanation": "`+/` over a matrix reduces along the last axis: one sum per row."
+  },
+  "columnSums": {
+    "title": "Column sums",
+    "prompt": "Sum each column of a 3×4 matrix.",
+    "result": "15 18 21 24",
+    "explanation": "Same idea as `+/` but with `⌿` (slash with bar), which acts on the first axis: one sum per column."
+  },
+  "matrixTranspose": {
+    "title": "Matrix transpose",
+    "prompt": "Transpose a 2×3 matrix into a 3×2 matrix.",
+    "result": "1 4\n2 5\n3 6",
+    "explanation": "Monadic `⍉` swaps rows and columns. A 2×3 becomes a 3×2."
+  },
+  "identityMatrix": {
+    "title": "Identity pattern",
+    "prompt": "Build a 5×5 matrix with 1 on the diagonal and 0 elsewhere.",
+    "result": "1 0 0 0 0\n0 1 0 0 0\n0 0 1 0 0\n0 0 0 1 0\n0 0 0 0 1",
+    "explanation": "`∘.f` builds a table by comparing every pair `(i,j)`. With `=`, the cell is `1` only where `i=j`: the diagonal."
+  },
+  "multiplicationTable": {
+    "title": "Multiplication table",
+    "prompt": "Build the full 10×10 multiplication table.",
+    "result": "10×10 matrix where cell (i,j) = i×j",
+    "explanation": "Outer product `∘.×`: every `i` from the left is paired with every `j` from the right and the two are multiplied. Whole table in one line."
+  },
+  "outerSum": {
+    "title": "Outer sum",
+    "prompt": "Build the outer sum of 1..3 with itself.",
+    "result": "2 3 4\n3 4 5\n4 5 6",
+    "explanation": "Outer product with `+`: every cell is `i+j`."
+  },
+  "dotProduct": {
+    "title": "Dot product",
+    "prompt": "Compute the dot product of 1 2 3 and 4 5 6.",
+    "result": "32",
+    "explanation": "`+.×` multiplies element-wise (`4 10 18`) and then sums. The classical inner product."
+  },
+  "matrixMultiply": {
+    "title": "Matrix multiplication",
+    "prompt": "Multiply a 2×3 matrix by a 3×2 matrix.",
+    "result": "22 28\n49 64",
+    "explanation": "Over matrices, `+.×` is the standard matrix product: row by column."
+  },
+  "binaryToInt": {
+    "title": "Binary to integer",
+    "prompt": "Convert the binary digits 1 0 1 1 to a decimal integer.",
+    "result": "11",
+    "explanation": "`⊥` (decode) reads the right vector as digits in the base given on the left. `1011` in base 2 is `11`."
+  },
+  "intToBinary8": {
+    "title": "Integer to 8-bit binary",
+    "prompt": "Encode the number 11 as eight binary digits.",
+    "result": "0 0 0 0 1 0 1 1",
+    "explanation": "`⊤` (encode) is the inverse of `⊥`. `8⍴2` asks for eight digits, all in base 2."
+  },
+  "hammingWeight": {
+    "title": "Hamming weight",
+    "prompt": "Count how many bits are set in the 8-bit representation of 11.",
+    "result": "3",
+    "explanation": "Encode `11` in 8 bits, then `+/` sums the digits. That is the popcount."
+  },
+  "filterPositives": {
+    "title": "Keep only positive values",
+    "prompt": "Keep only the strictly positive values of ¯2 ¯1 0 1 2.",
+    "result": "1 2",
+    "explanation": "`0<v` produces the mask `0 0 0 1 1`. `/` uses it to keep only the elements where the mask is `1`."
+  },
+  "pascalRow": {
+    "title": "Pascal's triangle row",
+    "prompt": "Compute row 6 of Pascal's triangle.",
+    "result": "1 6 15 20 15 6 1",
+    "explanation": "Dyadic `!` is the binomial coefficient `(k choose 6)`. With `k` running from `0` to `6` (that is `¯1+⍳7`), you obtain the entire row."
+  },
+  "factorialReduce": {
+    "title": "Factorial via reduce",
+    "prompt": "Compute 7! using the reduce operator on multiplication.",
+    "result": "5040",
+    "explanation": "`×/` on `1..7` multiplies everything together: `7!`."
+  },
+  "palindromeNumeric": {
+    "title": "Is it a palindrome?",
+    "prompt": "Check whether 1 2 3 2 1 reads the same forwards and backwards.",
+    "result": "1 (true)",
+    "explanation": "Compare the vector with its reverse: you get `1` everywhere if it is a palindrome. `∧/` (AND of all bits) is `1` only when every position matches."
+  },
+  "countA": {
+    "title": "Count letters",
+    "prompt": "How many times does the letter 'a' appear in 'banana'?",
+    "result": "3",
+    "explanation": "`'banana'='a'` compares character by character, producing `0 1 0 1 0 1`. `+/` sums."
+  },
+  "countVowels": {
+    "title": "Count vowels",
+    "prompt": "How many vowels are there in 'computation'?",
+    "result": "5",
+    "explanation": "`∊` against `'aeiou'` marks `1` on the letters that are vowels. The sum counts them: `o, u, a, i, o`."
+  },
+  "findSubstring": {
+    "title": "Find a substring",
+    "prompt": "Find every position where 'ana' appears inside 'banana'.",
+    "result": "2 4",
+    "explanation": "`⍷` places a `1` at every position where the searched string starts inside the larger one. `⍸` collects those indices."
+  },
+  "keepVowels": {
+    "title": "Filter the vowels",
+    "prompt": "Keep only the vowels from 'computation'.",
+    "result": "ouaio",
+    "explanation": "Same vowel-mask as the count, but used as compression (`/`) against the string: only the vowels survive."
+  },
+  "vectorMean": {
+    "title": "Mean of a vector",
+    "prompt": "Compute the mean of 4 8 15 16 23 42.",
+    "result": "18",
+    "explanation": "Sum `108` divided by length `6` gives `18`. Same pattern as `average`, just with a longer vector."
+  },
+  "variance": {
+    "title": "Variance",
+    "prompt": "Compute the variance of 2 4 4 4 5 5 7 9.",
+    "result": "4",
+    "explanation": "Mean: `40÷8 = 5`. Deviations from the mean: `¯3 ¯1 ¯1 ¯1 0 0 2 4`. Squared they sum to `32`. Divided by `8` you get `4`. Population variance."
+  },
+  "stddev": {
+    "title": "Standard deviation",
+    "prompt": "Compute the standard deviation of 2 4 4 4 5 5 7 9.",
+    "result": "2",
+    "explanation": "Square root of the previous variance: `√4 = 2`."
+  },
+  "composeWithDfn": {
+    "title": "Define an anonymous function",
+    "prompt": "Define an inline function that squares its argument, and apply it to 7.",
+    "result": "49",
+    "explanation": "Braces `{…}` define an anonymous function (a dfn). Inside, `⍵` is the right argument."
+  },
+  "defineAndReuse": {
+    "title": "Name and reuse a function",
+    "prompt": "Bind a name sq to the squaring function and apply it to 1..5.",
+    "result": "1 4 9 16 25",
+    "explanation": "`←` binds a name to a function exactly the way you would do with a variable. `⋄` separates statements on the same line."
+  },
+  "eachOperator": {
+    "title": "Each operator",
+    "prompt": "Apply the squaring function to every element of 1 2 3 4.",
+    "result": "1 4 9 16",
+    "explanation": "`¨` applies the function one element at a time. Redundant here (`*2` already works on the whole vector), but it shows the pattern."
+  },
+  "commute": {
+    "title": "Swap the arguments",
+    "prompt": "Compute 3 - 10 by writing 10 first.",
+    "result": "¯7",
+    "explanation": "`f⍨` swaps the arguments before applying `f`. So `10 -⍨ 3` runs `3 - 10`."
+  },
+  "selfApply": {
+    "title": "Self-apply",
+    "prompt": "Compute 5+5 by using each side as the same number.",
+    "result": "10",
+    "explanation": "Used monadically, `f⍨ ⍵` is equivalent to `⍵ f ⍵`. Hence `+⍨ 5` is `5+5`."
+  },
+  "manhattan": {
+    "title": "Two-argument function",
+    "prompt": "Define manhattan as the Manhattan distance between two vectors, then call it on 1 2 3 and 4 6 8.",
+    "result": "12",
+    "explanation": "Inside a dyadic dfn `⍺` is the left argument and `⍵` the right. Element-wise differences `¯3 ¯4 ¯5`, absolute values `3 4 5`, sum `12`. The taxicab distance."
+  },
+  "sumOfSquaresOneLine": {
+    "title": "Sum of squares in one line",
+    "prompt": "Compute the sum of the squares of 1..5 using each and reduce together.",
+    "result": "55",
+    "explanation": "`{⍵*2}¨⍳5` produces `1 4 9 16 25`. `+/` sums."
+  },
+  "indicesOfEvens": {
+    "title": "Indices of even values",
+    "prompt": "List the positions of the even values in 4 7 8 11 12.",
+    "result": "1 3 5",
+    "explanation": "`2|v` gives `0 1 0 1 0`. `0=` marks the evens with `1`, yielding `1 0 1 0 1`. `⍸` returns the positions."
+  },
+  "replicateByVector": {
+    "title": "Replicate by counts",
+    "prompt": "Repeat 'a', 'b' and 'c' respectively 1, 2 and 3 times.",
+    "result": "abbccc",
+    "explanation": "Dyadic `/` replicates every right-hand item as many times as the matching left-hand count says."
+  },
+  "expandZeros": {
+    "title": "Expand with zeros",
+    "prompt": "Insert a zero between every pair of values in 7 8 9.",
+    "result": "7 0 8 0 9",
+    "explanation": "`\\` uses the mask `1 0 1 0 1` as a stencil: on a `1` it places the next source value, on a `0` it inserts a fill (zero for numbers)."
+  },
+  "rotateVector": {
+    "title": "Rotate a vector",
+    "prompt": "Rotate 1 2 3 4 5 left by two positions.",
+    "result": "3 4 5 1 2",
+    "explanation": "Dyadic `⌽` rotates. A positive count on the left means a leftward rotation by that many slots."
+  },
+  "medianOdd": {
+    "title": "Median (odd length)",
+    "prompt": "Compute the median of 5 1 9 3 7.",
+    "result": "5",
+    "explanation": "Sort, compute the middle position `⌈5÷2 = 3`, pick that element. Works only for odd lengths."
+  },
+  "countOccurrences": {
+    "title": "Count occurrences",
+    "prompt": "How many times does 2 appear inside 1 2 3 2 4 2?",
+    "result": "3",
+    "explanation": "`2=v` produces the mask of twos. Summing the mask counts them."
+  },
+  "isSortedAscending": {
+    "title": "Is the vector sorted?",
+    "prompt": "Check whether 1 2 3 5 4 is sorted in ascending order.",
+    "result": "0 (no)",
+    "explanation": "`1↓v` drops the first element, `¯1↓v` drops the last. Comparing them position-wise with `≥` gives the consecutive pairs: `1 1 1 0`. `∧/` is `0` because `4` is not `≥ 5`."
+  },
+  "primesUpTo20": {
+    "title": "Primes up to 20",
+    "prompt": "List every prime number up to 20.",
+    "result": "2 3 5 7 11 13 17 19",
+    "explanation": "Core idea: a number is prime when it has exactly two divisors (1 and itself).\n\n`(⍳20)∘.|⍳20` builds a table where cell `(i,j)` equals `i mod j`. `0=` turns that into `1` whenever the division is exact. `+⌿` sums per column, giving the divisor count of each candidate. `2=` isolates the ones with exactly two divisors. `/` filters `⍳20` through that mask."
+  },
+  "sumOfDigits": {
+    "title": "Sum of decimal digits",
+    "prompt": "Compute the sum of the decimal digits of 12345.",
+    "result": "15",
+    "explanation": "`⍕12345` formats the number into the character vector `'12345'`. Dyadic `⍳` against `'0123456789'` looks up each character among the digits, returning 1-based positions `2 3 4 5 6`. `¯1+` shifts them back into `0..9`, giving `1 2 3 4 5`. `+/` sums to `15`."
+  },
+  "stringLength": {
+    "title": "String length",
+    "prompt": "How long is the word 'arrays'?",
+    "result": "6",
+    "explanation": "A string is a vector of characters, so `⍴` gives its length."
+  },
+  "reverseString": {
+    "title": "Reverse a string",
+    "prompt": "Reverse the characters of 'arrays'.",
+    "result": "syarra",
+    "explanation": "`⌽` works on any vector, characters included."
+  },
+  "indexOfLastOne": {
+    "title": "Position of the last 1",
+    "prompt": "Find the position of the last 1 inside 0 1 0 1 1 0 1 0.",
+    "result": "7",
+    "explanation": "`⍸` returns the positions of all the `1`s: `2 4 5 7`. `⌽` reverses them to `7 5 4 2`. `⊃` takes the first one: that is the position of the last original `1`."
+  },
+  "inverse2x2": {
+    "title": "Invert a 2×2 matrix",
+    "prompt": "Invert the matrix whose rows are 1 2 and 3 4.",
+    "result": "¯2    1\n 1.5 ¯0.5",
+    "explanation": "Monadic `⌹` computes the inverse of a square matrix. Determinant of `(1 2; 3 4)` is `1·4 - 2·3 = ¯2`, and the rest follows from the standard 2×2 formula."
+  },
+  "hexDecode": {
+    "title": "Hexadecimal decoding",
+    "prompt": "Decode the digits 1 0 0 read in base 16.",
+    "result": "256",
+    "explanation": "Digits `1 0 0` in base 16 are worth `1·256 + 0·16 + 0 = 256`. The familiar `0x100`."
+  },
+  "iversonPrimes": {
+    "title": "Primality indicator",
+    "prompt": "Produce a 0/1 indicator telling whether each number from 1 to 10 is prime.",
+    "result": "0 1 1 0 1 0 1 0 0 0",
+    "explanation": "Same construction as the primes-up-to-20 exercise, without the final filter. What remains is the mask (an Iverson vector): `1` where the number is prime, `0` elsewhere."
+  },
+  "magnitudeSquared": {
+    "title": "Magnitude squared",
+    "prompt": "Compute the squared magnitude of the vector 3 4.",
+    "result": "25",
+    "explanation": "`3 4 * 2` squares each element (`9 16`). `+/` sums to `25`. The squared magnitude of the vector."
+  },
+  "l1Norm": {
+    "title": "L1 norm",
+    "prompt": "Compute the L1 norm of ¯3 1 ¯4 1 5.",
+    "result": "14",
+    "explanation": "Absolute values `3 1 4 1 5`, sum `14`. The taxicab distance from the origin."
+  },
+  "tailOfVector": {
+    "title": "Tail of a vector",
+    "prompt": "Return every element of 10 20 30 40 except the first.",
+    "result": "20 30 40",
+    "explanation": "`1↓v` drops the first element."
+  },
+  "pascalSum": {
+    "title": "Sum of a row of Pascal's triangle",
+    "prompt": "Compute the sum of row 8 of Pascal's triangle. The answer should equal 2 to the 8th power.",
+    "result": "256",
+    "explanation": "The sum of the binomial coefficients on row `n` of Pascal's triangle is always `2^n`. Here `n=8`."
+  },
+  "indexOrigin": {
+    "title": "Index origin",
+    "prompt": "Show the index origin of the interpreter.",
+    "result": "1",
+    "explanation": "`⎕IO` is the system variable that says where indexing starts. This interpreter uses `1`, the classic APL convention."
+  },
+  "alphabetSystem": {
+    "title": "Uppercase alphabet",
+    "prompt": "Print the uppercase alphabet using a system constant.",
+    "result": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "explanation": "`⎕A` is a system constant containing the entire uppercase Latin alphabet as a 26-character vector."
+  },
+  "digitsSystem": {
+    "title": "Digit string",
+    "prompt": "Print the ten decimal digits as a string.",
+    "result": "0123456789",
+    "explanation": "`⎕D` is the ten-digit string. Handy when mapping digit-characters into numeric values."
+  },
+  "currentTimestamp": {
+    "title": "Current timestamp",
+    "prompt": "Read the current timestamp as a vector.",
+    "result": "vector of 7 numbers (year month day hour minute second millisecond)",
+    "explanation": "`⎕TS` snapshots the current instant into seven integers."
+  },
+  "year": {
+    "title": "Current year",
+    "prompt": "Read only the current year from the timestamp.",
+    "result": "the current year (integer)",
+    "explanation": "`⊃⎕TS` takes the first element of the timestamp."
+  },
+  "alphabetReversed": {
+    "title": "Alphabet reversed",
+    "prompt": "Print the alphabet from Z down to A.",
+    "result": "ZYXWVUTSRQPONMLKJIHGFEDCBA",
+    "explanation": "`⌽⎕A` reverses the alphabet."
+  },
+  "executeSimple": {
+    "title": "Execute text",
+    "prompt": "Parse and run the string '1+2' as if it were typed.",
+    "result": "3",
+    "explanation": "`⍎` (execute) takes a string and evaluates it as if it were APL code typed by hand."
+  },
+  "executeSum": {
+    "title": "Execute a reduction",
+    "prompt": "Execute the string '+/⍳10' to compute 55.",
+    "result": "55",
+    "explanation": "Same idea: the string is parsed as any APL line would be."
+  },
+  "executeMatrix": {
+    "title": "Execute a matrix expression",
+    "prompt": "Execute the string '3 3 ⍴ ⍳9' to build a 3×3 matrix.",
+    "result": "1 2 3\n4 5 6\n7 8 9",
+    "explanation": "The string carries the full matrix formula. `⍎` runs it as though you had typed it."
+  },
+  "tradfnInc": {
+    "title": "Tradfn-style increment",
+    "prompt": "Define inc inside a ∇ … ∇ block and apply it to 9.",
+    "result": "10",
+    "explanation": "The markers `∇ … ∇` delimit a traditional function definition. Here they wrap a small dfn that adds `1`."
+  },
+  "tradfnSum": {
+    "title": "Tradfn alias for sum",
+    "prompt": "Bind tot to +/ using a ∇ block and apply it to ⍳100.",
+    "result": "5050",
+    "explanation": "`tot` gets aliased to `+/` inside `∇ … ∇`. Applied to `1..100` it returns Gauss's sum."
+  },
+  "tradfnDistance": {
+    "title": "Tradfn for Euclidean distance",
+    "prompt": "Inside a ∇ block, bind dist to the Euclidean distance and call it on 0 0 and 3 4.",
+    "result": "5",
+    "explanation": "Differences, squared, summed, square-rooted. `√(9+16) = 5`."
+  },
+  "letterIndex": {
+    "title": "Letter index inside the alphabet",
+    "prompt": "Find the position of each letter of 'CAT' in the alphabet.",
+    "result": "3 1 20",
+    "explanation": "`⎕A ⍳ 'CAT'` looks up each letter inside the alphabet and reports its position: C → 3, A → 1, T → 20."
+  },
+  "digitFromChar": {
+    "title": "From digit characters to integers",
+    "prompt": "Turn the characters of '42' into the integers 4 and 2.",
+    "result": "4 2",
+    "explanation": "`⎕D ⍳ '42'` finds `'4'` and `'2'` among the digits, at positions 5 and 3 (1-based). `¯1+` shifts them back into the values `0..9`."
+  },
+  "executeBuildExpr": {
+    "title": "Build and execute an expression",
+    "prompt": "Compose the string '×/' followed by '1 2 3 4 5' and execute it.",
+    "result": "120",
+    "explanation": "Builds an APL string on the fly: `⍕⍳5` produces `'1 2 3 4 5'`, catenation prepends `'×/'`, and `⍎` runs the resulting source."
+  },
+  "matchEqualVectors": {
+    "title": "Match two equal vectors",
+    "prompt": "Check whether 1 2 3 and 1 2 3 are structurally equal.",
+    "result": "1",
+    "explanation": "`≡` returns 1 only when both arrays have the same shape and every element matches."
+  },
+  "matchUnequalVectors": {
+    "title": "Match two different vectors",
+    "prompt": "Check whether 1 2 3 and 1 2 4 are structurally equal.",
+    "result": "0",
+    "explanation": "Shapes match but one element differs, so `≡` returns 0."
+  },
+  "matchShapeMismatch": {
+    "title": "Match with different shapes",
+    "prompt": "Compare two vectors of different length.",
+    "result": "0",
+    "explanation": "When shapes differ `≡` returns 0 without inspecting individual values."
+  },
+  "depthScalar": {
+    "title": "Depth of a scalar",
+    "prompt": "Ask for the nesting depth of the scalar 5.",
+    "result": "0",
+    "explanation": "Monadic `≡` returns 0 for any simple scalar, since there is no nesting."
+  },
+  "depthFlatVector": {
+    "title": "Depth of a flat vector",
+    "prompt": "Ask for the depth of 1 2 3 4.",
+    "result": "1",
+    "explanation": "A simple, non-nested array has depth 1."
+  },
+  "tallyVector": {
+    "title": "Tally a vector",
+    "prompt": "Count the items of 10 20 30 40 50.",
+    "result": "5",
+    "explanation": "Monadic `≢` returns the length of the first axis. For a vector that is its element count."
+  },
+  "tallyMatrixRows": {
+    "title": "Tally the rows of a matrix",
+    "prompt": "How many rows in a 3 by 4 matrix?",
+    "result": "3",
+    "explanation": "`≢` measures the first axis. For a matrix that is the row count."
+  },
+  "notMatchVectors": {
+    "title": "Not match two vectors",
+    "prompt": "Verify that 1 2 3 and 1 2 4 do not match.",
+    "result": "1",
+    "explanation": "`≢` is the logical negation of `≡`: 1 when the arrays differ in shape or values."
+  },
+  "palindromeWithMatch": {
+    "title": "Palindrome check with match",
+    "prompt": "Reverse 1 2 3 2 1 and check whether the result matches the original.",
+    "result": "1",
+    "explanation": "`⌽` reverses the vector. `≡` confirms the structural equality element by element."
+  },
+  "tallyStringLength": {
+    "title": "String length via tally",
+    "prompt": "How many characters in 'workbench'?",
+    "result": "9",
+    "explanation": "On a character vector `≢` returns its length, just like `⍴` for a vector but always returning a scalar."
+  },
+  "zildeShape": {
+    "title": "Shape of zilde",
+    "prompt": "What is the shape of the empty numeric vector ⍬?",
+    "result": "0",
+    "explanation": "`⍬` is the canonical empty numeric vector, length 0, rank 1."
+  },
+  "sumOfEmpty": {
+    "title": "Sum of zilde",
+    "prompt": "Reduce ⍬ with plus.",
+    "result": "0",
+    "explanation": "Reducing an empty vector returns the identity element of the function. For `+` that is 0."
+  },
+  "buildVectorFromZilde": {
+    "title": "Catenate onto zilde",
+    "prompt": "Prepend ⍬ to 1 2 3.",
+    "result": "1 2 3",
+    "explanation": "Catenating to zilde is a no-op, useful when accumulating in a loop that starts empty."
+  },
+  "partitionCount": {
+    "title": "Count partition groups",
+    "prompt": "How many groups does 1 1 2 2 0 3 3 ⊆ 'abcdefg' produce?",
+    "result": "3",
+    "explanation": "`⊆` starts a new group whenever the left value rises (or repeats a different positive value) and drops items where the left value is 0."
+  },
+  "partitionFirstGroup": {
+    "title": "First partition group",
+    "prompt": "Disclose the first partition of 'abcdefg' under 1 1 2 2 0 3 3.",
+    "result": "ab",
+    "explanation": "`⊃` picks the first item of the partitioned result, which is the character vector 'ab'."
+  },
+  "nestRaisesDepth": {
+    "title": "Nest raises depth",
+    "prompt": "Wrap 1 2 3 with ⊆ and check its new depth.",
+    "result": "2",
+    "explanation": "`⊆` on a non-scalar wraps it into a scalar container, lifting the depth from 1 to 2."
+  },
+  "powerIncrement": {
+    "title": "Apply increment ten times",
+    "prompt": "Start from 0 and add 1 ten times with ⍣.",
+    "result": "10",
+    "explanation": "`f⍣N` applies `f` to its argument `N` times in sequence. Equivalent to a tight `for` loop with no body to write."
+  },
+  "powerDoubling": {
+    "title": "Double a value eight times",
+    "prompt": "Start from 1 and double it eight times.",
+    "result": "256",
+    "explanation": "Each iteration multiplies by 2. After 8 iterations the value is 2 to the 8th, that is 256."
+  },
+  "rankSumRows": {
+    "title": "Sum each row with rank",
+    "prompt": "Sum every row of a 3 by 4 matrix of ⍳12.",
+    "result": "10 26 42",
+    "explanation": "`+/⍤1` says: apply `+/` to every 1-cell (every row). The result is a vector of row sums."
+  },
+  "atReplaceAtIndex": {
+    "title": "Replace at a single index",
+    "prompt": "Replace position 2 of 1 2 3 4 5 with 0 using @.",
+    "result": "1 0 3 4 5",
+    "explanation": "`{0}@2` applies the constant function `{0}` at index 2 of the right argument."
+  },
+  "atReplaceMany": {
+    "title": "Replace at multiple indices",
+    "prompt": "Replace positions 1, 3 and 5 of 10 20 30 40 50 with ¯1.",
+    "result": "¯1 20 ¯1 40 ¯1",
+    "explanation": "When the right operand of `@` is a vector of indices, the function is applied at each of them."
+  },
+  "quoteQuadShape": {
+    "title": "Shape of quote-quad",
+    "prompt": "What is the shape of ⍞?",
+    "result": "0",
+    "explanation": "In this interpreter `⍞` (character console I/O) reads as an empty character vector, since no terminal input is wired."
+  },
+  "minReduce": {
+    "title": "Minimum via reduce",
+    "prompt": "Find the smallest value of 4 2 7 1 9 3 using a reduction.",
+    "result": "1",
+    "explanation": "`⌊` between two numbers keeps the smaller one. `⌊/` folds that across the vector, leaving the global minimum."
+  },
+  "rangeSpread": {
+    "title": "Range of a vector",
+    "prompt": "Compute the spread (max minus min) of 5 1 9 3 7.",
+    "result": "8",
+    "explanation": "`⌈/` gives `9`, `⌊/` gives `1`. Subtracting them yields the range. A one-liner for statistical spread."
+  },
+  "countNonZero": {
+    "title": "Count non-zero values",
+    "prompt": "How many non-zero values are in 0 3 0 5 0 2?",
+    "result": "3",
+    "explanation": "`0 ≠ v` marks every position whose value differs from zero. `+/` sums those marks."
+  },
+  "allEqualToFive": {
+    "title": "Check all equal to 5",
+    "prompt": "Verify that every element of 5 5 5 5 equals 5.",
+    "result": "1",
+    "explanation": "`v = 5` produces a boolean mask. `∧/` is the AND of all bits, so it returns `1` only when every position matched."
+  },
+  "anyTrue": {
+    "title": "At least one true",
+    "prompt": "Is there any 1 in the vector 0 0 1 0 0?",
+    "result": "1",
+    "explanation": "`∨/` is the OR of all bits. As soon as a single `1` appears, the reduction is `1`."
+  },
+  "firstDifference": {
+    "title": "First differences",
+    "prompt": "Compute consecutive differences of 10 13 15 19.",
+    "result": "3 2 4",
+    "explanation": "`1↓v` drops the first element, `¯1↓v` drops the last. Subtracting them position-wise yields each gap between neighbours."
+  },
+  "arrayMaxFlat": {
+    "title": "Maximum across a matrix",
+    "prompt": "Find the largest value anywhere inside a 2×3 matrix of 1 5 2 9 3 4.",
+    "result": "9",
+    "explanation": "Comma flattens the matrix into a vector. `⌈/` then reduces that vector to its single largest value."
+  },
+  "dropOnString": {
+    "title": "Drop characters",
+    "prompt": "Drop the first two characters of 'apl'.",
+    "result": "l",
+    "explanation": "`↓` works on character vectors exactly as it does on numeric ones."
+  },
+  "doubleNegation": {
+    "title": "Double negation",
+    "prompt": "Apply monadic minus twice to 5.",
+    "result": "5",
+    "explanation": "Right to left: `-5` is `¯5`, then `-` again returns `5`. Two sign flips cancel."
+  },
+  "rightFoldSubtract": {
+    "title": "Right-fold subtraction",
+    "prompt": "Reduce 10 3 2 with subtraction and explain why the answer is not 5.",
+    "result": "9",
+    "explanation": "Reductions in APL fold from the right. `-/ 10 3 2` is `10 - (3 - 2)`, which equals `10 - 1 = 9`. A common surprise for newcomers."
+  },
+  "encodeTimeOfDay": {
+    "title": "Seconds to h:m:s",
+    "prompt": "Convert 3725 seconds into hours, minutes and seconds.",
+    "result": "1 2 5",
+    "explanation": "`⊤` encodes a number against a mixed base. With bases `24 60 60` you split `3725` into 1 hour, 2 minutes and 5 seconds."
+  },
+  "floorDivision": {
+    "title": "Floor division",
+    "prompt": "Compute 17 divided by 5 rounded down.",
+    "result": "3",
+    "explanation": "`17÷5` is `3.4`. Monadic `⌊` rounds toward minus infinity, yielding `3`."
+  },
+  "distinctCharCount": {
+    "title": "Distinct letters in a word",
+    "prompt": "How many distinct letters are there in 'mississippi'?",
+    "result": "4",
+    "explanation": "`∪` keeps one copy of every character: `m`, `i`, `s`, `p`. `⍴` reports the length of that vector."
+  },
+  "matrixMaxByRow": {
+    "title": "Row-wise maximum",
+    "prompt": "For a 2×3 matrix of 1 5 2 9 3 4, find the largest value in each row.",
+    "result": "5 9",
+    "explanation": "`⌈/` over a matrix reduces along the last axis: one maximum per row. Row 1 maxes at `5`, row 2 at `9`."
+  },
+  "countMatching": {
+    "title": "Count matching values",
+    "prompt": "How many times does 7 appear in 7 3 7 1 7?",
+    "result": "3",
+    "explanation": "`7 = v` produces a boolean mask of matches. `+/` sums to the count."
+  },
+  "harmonicMean": {
+    "title": "Harmonic mean",
+    "prompt": "Compute the harmonic mean of 2 and 6.",
+    "result": "3",
+    "explanation": "Harmonic mean: `n` divided by the sum of reciprocals. Here `2 ÷ (½+⅙) = 2 ÷ ⅔ = 3`. `÷v` produces the reciprocals, `+/` sums them, `(⍴v)÷` divides."
+  },
+  "composeFunctions": {
+    "title": "Compose two functions",
+    "prompt": "Define f as +1, g as ×2, then apply f after g to 5.",
+    "result": "11",
+    "explanation": "Right to left, as always: `g 5` is `10`, then `f 10` is `11`. Function composition in APL is just juxtaposition."
+  },
+  "interleaveZeros": {
+    "title": "Interleave with zeros",
+    "prompt": "Insert a zero after every value of 7 8 9 10.",
+    "result": "7 0 8 0 9 0 10",
+    "explanation": "Expand `\\` uses the mask `1 0 1 0 1 0 1` as a stencil: every `1` consumes the next source value, every `0` inserts a fill (zero for numerics)."
+  },
+  "clampUpper": {
+    "title": "Cap values at five",
+    "prompt": "Cap every value of 3 7 9 2 10 at 5.",
+    "result": "3 5 5 2 5",
+    "explanation": "Dyadic `⌊` returns the smaller of the two arguments. With a scalar left, each right-hand value is clipped down to that ceiling."
+  },
+  "sumOfBoolean": {
+    "title": "Sum a boolean vector",
+    "prompt": "Count the 1s in 1 0 1 1 0 1.",
+    "result": "4",
+    "explanation": "`+/` on a 0/1 vector is just a popcount: how many bits are set."
+  }
+}
